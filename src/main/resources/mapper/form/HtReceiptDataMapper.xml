@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.form.dao.HtReceiptDataMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.form.entity.HtReceiptData" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="form_id" property="formId" jdbcType="VARCHAR" />
+    <result column="bd_id" property="bdId" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_number" property="bankNumber" jdbcType="VARCHAR" />
+    <result column="bh_report_no" property="bhReportNo" jdbcType="VARCHAR" />
+    <result column="payee_name" property="payeeName" jdbcType="VARCHAR" />
+    <result column="payee_id_number" property="payeeIdNumber" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="CHAR" />
+    <result column="pass_back" property="passBack" jdbcType="CHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="province_code" property="provinceCode" jdbcType="VARCHAR" />
+    <result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+    <result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+    <result column="bank_type" property="bankType" jdbcType="VARCHAR" />
+    <result column="band_img" property="bandImg" jdbcType="VARCHAR" />
+    <result column="keep_img" property="keepImg" jdbcType="VARCHAR" />
+    <result column="insurance_number" property="insuranceNumber" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP" />
+    <result column="examine_date" property="examineDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, form_id, bd_id, bank_name, bank_number, bh_report_no, payee_name, payee_id_number, 
+    audit_status, pass_back, create_date, create_by, update_date, update_by, remark, 
+    province_code, city_code, district_code, bank_type, band_img, keep_img, insurance_number, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_receipt_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_receipt_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.form.entity.HtReceiptData" >
+    insert into ht_receipt_data (id, form_id, bd_id, 
+      bank_name, bank_number, bh_report_no, 
+      payee_name, payee_id_number, audit_status, 
+      pass_back, create_date, create_by, 
+      update_date, update_by, remark, 
+      province_code, city_code, district_code, 
+      bank_type, band_img, keep_img, 
+      insurance_number, status)
+    values (#{id,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, #{bdId,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{bankNumber,jdbcType=VARCHAR}, #{bhReportNo,jdbcType=VARCHAR}, 
+      #{payeeName,jdbcType=VARCHAR}, #{payeeIdNumber,jdbcType=VARCHAR}, #{auditStatus,jdbcType=CHAR}, 
+      #{passBack,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{districtCode,jdbcType=VARCHAR}, 
+      #{bankType,jdbcType=VARCHAR}, #{bandImg,jdbcType=VARCHAR}, #{keepImg,jdbcType=VARCHAR}, 
+      #{insuranceNumber,jdbcType=VARCHAR}, "1")
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.form.entity.HtReceiptData" >
+    insert into ht_receipt_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="formId != null" >
+        form_id,
+      </if>
+      <if test="bdId != null" >
+        bd_id,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankNumber != null" >
+        bank_number,
+      </if>
+      <if test="bhReportNo != null" >
+        bh_report_no,
+      </if>
+      <if test="payeeName != null" >
+        payee_name,
+      </if>
+      <if test="payeeIdNumber != null" >
+        payee_id_number,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="passBack != null" >
+        pass_back,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="provinceCode != null" >
+        province_code,
+      </if>
+      <if test="cityCode != null" >
+        city_code,
+      </if>
+      <if test="districtCode != null" >
+        district_code,
+      </if>
+      <if test="bankType != null" >
+        bank_type,
+      </if>
+      <if test="bandImg != null" >
+        band_img,
+      </if>
+      <if test="keepImg != null" >
+        keep_img,
+      </if>
+      <if test="insuranceNumber != null" >
+        insurance_number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdId != null" >
+        #{bdId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bhReportNo != null" >
+        #{bhReportNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeName != null" >
+        #{payeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeIdNumber != null" >
+        #{payeeIdNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=CHAR},
+      </if>
+      <if test="passBack != null" >
+        #{passBack,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="bandImg != null" >
+        #{bandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="keepImg != null" >
+        #{keepImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNumber != null" >
+        #{insuranceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.form.entity.HtReceiptData" >
+    update ht_receipt_data
+    <set >
+      <if test="formId != null" >
+        form_id = #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdId != null" >
+        bd_id = #{bdId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        bank_number = #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bhReportNo != null" >
+        bh_report_no = #{bhReportNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeName != null" >
+        payee_name = #{payeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeIdNumber != null" >
+        payee_id_number = #{payeeIdNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=CHAR},
+      </if>
+      <if test="passBack != null" >
+        pass_back = #{passBack,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        province_code = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        district_code = #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        bank_type = #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="bandImg != null" >
+        band_img = #{bandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="keepImg != null" >
+        keep_img = #{keepImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNumber != null" >
+        insurance_number = #{insuranceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByFormId" parameterType="com.dxt.ht.svc.form.entity.HtReceiptData" >
+        update ht_receipt_data
+        <set >
+            <if test="bdId != null" >
+                bd_id = #{bdId,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNumber != null" >
+                bank_number = #{bankNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="bhReportNo != null" >
+                bh_report_no = #{bhReportNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payeeName != null" >
+                payee_name = #{payeeName,jdbcType=VARCHAR},
+            </if>
+            <if test="payeeIdNumber != null" >
+                payee_id_number = #{payeeIdNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="passBack != null" >
+                pass_back = #{passBack,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceCode != null" >
+                province_code = #{provinceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cityCode != null" >
+                city_code = #{cityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="districtCode != null" >
+                district_code = #{districtCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankType != null" >
+                bank_type = #{bankType,jdbcType=VARCHAR},
+            </if>
+            <if test="bandImg != null" >
+                band_img = #{bandImg,jdbcType=VARCHAR},
+            </if>
+            <if test="keepImg != null" >
+                keep_img = #{keepImg,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceNumber != null" >
+                insurance_number = #{insuranceNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="auditStatus != null" >
+                audit_status = #{auditStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="applyDate != null" >
+                apply_date = #{applyDate,jdbcType=CHAR},
+            </if>
+        </set>
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.form.entity.HtReceiptData" >
+    update ht_receipt_data
+    set form_id = #{formId,jdbcType=VARCHAR},
+      bd_id = #{bdId,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_number = #{bankNumber,jdbcType=VARCHAR},
+      bh_report_no = #{bhReportNo,jdbcType=VARCHAR},
+      payee_name = #{payeeName,jdbcType=VARCHAR},
+      payee_id_number = #{payeeIdNumber,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=CHAR},
+      pass_back = #{passBack,jdbcType=CHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      district_code = #{districtCode,jdbcType=VARCHAR},
+      bank_type = #{bankType,jdbcType=VARCHAR},
+      band_img = #{bandImg,jdbcType=VARCHAR},
+      keep_img = #{keepImg,jdbcType=VARCHAR},
+      insurance_number = #{insuranceNumber,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectReceiptStatus" resultType="java.lang.String">
+    SELECT `status` FROM ht_receipt_data WHERE form_id = #{formId}
+  </select>
+    <select id="selectReceiptAuditStatus" resultType="java.lang.String">
+    SELECT audit_status as "auditStatus" FROM ht_receipt_data WHERE form_id = #{formId}
+  </select>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="hashmap" >
+        select
+        <include refid="Base_Column_List" />
+        from ht_receipt_data
+        where 1=1
+        <include refid="allColumnCond"/>
+    </select>
+
+    <sql id = "allColumnCond">
+        <if test = "formId != null and formId != ''">
+            AND form_id=#{formId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+</mapper>

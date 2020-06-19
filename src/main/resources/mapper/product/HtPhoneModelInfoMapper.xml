@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.product.dao.HtPhoneModelInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.product.entity.HtPhoneModelInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
+    <result column="distribution_id" property="distributionId" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="price_low" property="priceLow" jdbcType="DECIMAL" />
+    <result column="price_high" property="priceHigh" jdbcType="DECIMAL" />
+    <result column="phone_price" property="phonePrice" jdbcType="DECIMAL" />
+    <result column="screen_price" property="screenPrice" jdbcType="DECIMAL" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, brand_id, distribution_id, model, price_low, price_high, phone_price, screen_price, 
+    sort, create_date, create_by, update_date, update_by, remark, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_phone_model_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_phone_model_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.product.entity.HtPhoneModelInfo" >
+    insert into ht_phone_model_info (id, brand_id, distribution_id, 
+      model, price_low, price_high, 
+      phone_price, screen_price, sort, 
+      create_date, create_by, update_date, 
+      update_by, remark, status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, #{distributionId,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{priceLow,jdbcType=DECIMAL}, #{priceHigh,jdbcType=DECIMAL}, 
+      #{phonePrice,jdbcType=DECIMAL}, #{screenPrice,jdbcType=DECIMAL}, #{sort,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.product.entity.HtPhoneModelInfo" >
+    insert into ht_phone_model_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="distributionId != null" >
+        distribution_id,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="priceLow != null" >
+        price_low,
+      </if>
+      <if test="priceHigh != null" >
+        price_high,
+      </if>
+      <if test="phonePrice != null" >
+        phone_price,
+      </if>
+      <if test="screenPrice != null" >
+        screen_price,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionId != null" >
+        #{distributionId,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="priceLow != null" >
+        #{priceLow,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHigh != null" >
+        #{priceHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="phonePrice != null" >
+        #{phonePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="screenPrice != null" >
+        #{screenPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.product.entity.HtPhoneModelInfo" >
+    update ht_phone_model_info
+    <set >
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionId != null" >
+        distribution_id = #{distributionId,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="priceLow != null" >
+        price_low = #{priceLow,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHigh != null" >
+        price_high = #{priceHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="phonePrice != null" >
+        phone_price = #{phonePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="screenPrice != null" >
+        screen_price = #{screenPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.product.entity.HtPhoneModelInfo" >
+    update ht_phone_model_info
+    set brand_id = #{brandId,jdbcType=VARCHAR},
+      distribution_id = #{distributionId,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      price_low = #{priceLow,jdbcType=DECIMAL},
+      price_high = #{priceHigh,jdbcType=DECIMAL},
+      phone_price = #{phonePrice,jdbcType=DECIMAL},
+      screen_price = #{screenPrice,jdbcType=DECIMAL},
+      sort = #{sort,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

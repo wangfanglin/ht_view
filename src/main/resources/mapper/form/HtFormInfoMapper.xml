@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.form.dao.HtFormInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.form.entity.HtFormInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="policy_id" property="policyId" jdbcType="VARCHAR" />
+    <result column="manage_status" property="manageStatus" jdbcType="VARCHAR" />
+    <result column="form_status" property="formStatus" jdbcType="VARCHAR" />
+    <result column="form_type" property="formType" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="is_automatic" property="isAutomatic" jdbcType="CHAR" />
+    <result column="office_id" property="officeId" jdbcType="VARCHAR" />
+    <result column="is_run" property="isRun" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, policy_id, manage_status, form_status, form_type, status, create_by, create_date, 
+    update_by, update_date, remarks, is_automatic, office_id, is_run
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_form_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findAllFrom" resultType="java.lang.String" resultMap="BaseResultMap">
+      SELECT <include refid="Base_Column_List"/> FROM ht_form_info f WHERE policy_id = #{policyId} ORDER BY create_date DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_form_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.form.entity.HtFormInfo" >
+    insert into ht_form_info (id, policy_id, manage_status, 
+      form_status, form_type, status, 
+      create_by, create_date, update_by, 
+      update_date, remarks, is_automatic, 
+      office_id, is_run)
+    values (#{id,jdbcType=VARCHAR}, #{policyId,jdbcType=VARCHAR}, #{manageStatus,jdbcType=VARCHAR}, 
+      #{formStatus,jdbcType=VARCHAR}, #{formType,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{isAutomatic,jdbcType=CHAR}, 
+      #{officeId,jdbcType=VARCHAR}, #{isRun,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.form.entity.HtFormInfo" >
+    insert into ht_form_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="policyId != null" >
+        policy_id,
+      </if>
+      <if test="manageStatus != null" >
+        manage_status,
+      </if>
+      <if test="formStatus != null" >
+        form_status,
+      </if>
+      <if test="formType != null" >
+        form_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="isAutomatic != null" >
+        is_automatic,
+      </if>
+      <if test="officeId != null" >
+        office_id,
+      </if>
+      <if test="isRun != null" >
+        is_run,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="policyId != null" >
+        #{policyId,jdbcType=VARCHAR},
+      </if>
+      <if test="manageStatus != null" >
+        #{manageStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="formStatus != null" >
+        #{formStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="formType != null" >
+        #{formType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isAutomatic != null" >
+        #{isAutomatic,jdbcType=CHAR},
+      </if>
+      <if test="officeId != null" >
+        #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="isRun != null" >
+        #{isRun,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.form.entity.HtFormInfo" >
+    update ht_form_info
+    <set >
+      <if test="policyId != null" >
+        policy_id = #{policyId,jdbcType=VARCHAR},
+      </if>
+      <if test="manageStatus != null" >
+        manage_status = #{manageStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="formStatus != null" >
+        form_status = #{formStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="formType != null" >
+        form_type = #{formType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isAutomatic != null" >
+        is_automatic = #{isAutomatic,jdbcType=CHAR},
+      </if>
+      <if test="officeId != null" >
+        office_id = #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="isRun != null" >
+        is_run = #{isRun,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.form.entity.HtFormInfo" >
+    update ht_form_info
+    set policy_id = #{policyId,jdbcType=VARCHAR},
+      manage_status = #{manageStatus,jdbcType=VARCHAR},
+      form_status = #{formStatus,jdbcType=VARCHAR},
+      form_type = #{formType,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      is_automatic = #{isAutomatic,jdbcType=CHAR},
+      office_id = #{officeId,jdbcType=VARCHAR},
+      is_run = #{isRun,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

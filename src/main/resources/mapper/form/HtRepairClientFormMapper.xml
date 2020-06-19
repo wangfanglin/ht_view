@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.form.dao.HtRepairClientFormMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.form.entity.HtRepairClientForm" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="form_id" property="formId" jdbcType="VARCHAR" />
+    <result column="contact_status" property="contactStatus" jdbcType="VARCHAR" />
+    <result column="again_date" property="againDate" jdbcType="TIMESTAMP" />
+    <result column="claim_status" property="claimStatus" jdbcType="VARCHAR" />
+    <result column="claim_data" property="claimData" jdbcType="VARCHAR" />
+    <result column="phone_brand" property="phoneBrand" jdbcType="VARCHAR" />
+    <result column="is_qualified" property="isQualified" jdbcType="VARCHAR" />
+    <result column="phone_type" property="phoneType" jdbcType="VARCHAR" />
+    <result column="phone_color" property="phoneColor" jdbcType="VARCHAR" />
+    <result column="is_end" property="isEnd" jdbcType="VARCHAR" />
+    <result column="mail_date" property="mailDate" jdbcType="TIMESTAMP" />
+    <result column="express_company" property="expressCompany" jdbcType="VARCHAR" />
+    <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="repair_end_date" property="repairEndDate" jdbcType="TIMESTAMP" />
+    <result column="other_price" property="otherPrice" jdbcType="DECIMAL" />
+    <result column="other_remarks" property="otherRemarks" jdbcType="VARCHAR" />
+    <result column="man_hour_price" property="manHourPrice" jdbcType="DECIMAL" />
+    <result column="self_price" property="selfPrice" jdbcType="DECIMAL" />
+    <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="receipt_type" property="receiptType" jdbcType="VARCHAR" />
+    <result column="is_all" property="isAll" jdbcType="CHAR" />
+    <result column="equipment_take" property="equipmentTake" jdbcType="CHAR" />
+    <result column="new_imei" property="newImei" jdbcType="VARCHAR" />
+    <result column="repair_express_company" property="repairExpressCompany" jdbcType="VARCHAR" />
+    <result column="repair_express_no" property="repairExpressNo" jdbcType="VARCHAR" />
+    <result column="repair_express_date" property="repairExpressDate" jdbcType="TIMESTAMP" />
+    <result column="upload_image" property="uploadImage" jdbcType="VARCHAR" />
+    <result column="repair_count" property="repairCount" jdbcType="INTEGER" />
+    <result column="recording" property="recording" jdbcType="VARCHAR" />
+    <result column="claim_type" property="claimType" jdbcType="CHAR" />
+    <result column="close_type" property="closeType" jdbcType="CHAR" />
+    <result column="verifier" property="verifier" jdbcType="VARCHAR" />
+    <result column="reopen_type" property="reopenType" jdbcType="CHAR" />
+    <result column="operation_type" property="operationType" jdbcType="CHAR" />
+    <result column="is_yes" property="isYes" jdbcType="CHAR" />
+    <result column="is_repair_back" property="isRepairBack" jdbcType="CHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="damage_img" property="damageImg" jdbcType="VARCHAR" />
+    <result column="repair_end_image" property="repairEndImage" jdbcType="VARCHAR" />
+    <result column="repair_form_image" property="repairFormImage" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="other_reason" property="otherReason" jdbcType="VARCHAR" />
+    <result column="new_image" property="newImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, form_id, contact_status, again_date, claim_status, claim_data, phone_brand, is_qualified, 
+    phone_type, phone_color, is_end, mail_date, express_company, express_no, status, 
+    create_by, create_date, update_by, update_date, remarks, repair_end_date, other_price, 
+    other_remarks, man_hour_price, self_price, sum_price, receipt_type, is_all, equipment_take, 
+    new_imei, repair_express_company, repair_express_no, repair_express_date, upload_image, 
+    repair_count, recording, claim_type, close_type, verifier, reopen_type, operation_type, 
+    is_yes, is_repair_back, image, damage_img, repair_end_image, repair_form_image, reason, other_reason, new_image
+  </sql>
+
+    <sql id = "allColumnCond">
+        <if test = "formId != null and formId != ''">
+            AND form_id=#{formId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="hashmap" >
+        select
+        <include refid="Base_Column_List" />
+        from ht_repair_client_form
+        where 1=1
+        <include refid="allColumnCond"/>
+    </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_repair_client_form
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_repair_client_form
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.form.entity.HtRepairClientForm" >
+    insert into ht_repair_client_form (id, form_id, contact_status, 
+      again_date, claim_status, claim_data, 
+      phone_brand, is_qualified, phone_type, 
+      phone_color, is_end, mail_date, 
+      express_company, express_no, status, 
+      create_by, create_date, update_by, 
+      update_date, remarks, repair_end_date, 
+      other_price, other_remarks, man_hour_price, 
+      self_price, sum_price, receipt_type, 
+      is_all, equipment_take, new_imei, 
+      repair_express_company, repair_express_no, 
+      repair_express_date, upload_image, repair_count, 
+      recording, claim_type, close_type, 
+      verifier, reopen_type, operation_type, 
+      is_yes, is_repair_back, image, 
+      damage_img, repair_end_image, repair_form_image, 
+      reason, other_reason, new_image
+      )
+    values (#{id,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, #{contactStatus,jdbcType=VARCHAR}, 
+      #{againDate,jdbcType=TIMESTAMP}, #{claimStatus,jdbcType=VARCHAR}, #{claimData,jdbcType=VARCHAR}, 
+      #{phoneBrand,jdbcType=VARCHAR}, #{isQualified,jdbcType=VARCHAR}, #{phoneType,jdbcType=VARCHAR}, 
+      #{phoneColor,jdbcType=VARCHAR}, #{isEnd,jdbcType=VARCHAR}, #{mailDate,jdbcType=TIMESTAMP}, 
+      #{expressCompany,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{repairEndDate,jdbcType=TIMESTAMP}, 
+      #{otherPrice,jdbcType=DECIMAL}, #{otherRemarks,jdbcType=VARCHAR}, #{manHourPrice,jdbcType=DECIMAL}, 
+      #{selfPrice,jdbcType=DECIMAL}, #{sumPrice,jdbcType=DECIMAL}, #{receiptType,jdbcType=VARCHAR}, 
+      #{isAll,jdbcType=CHAR}, #{equipmentTake,jdbcType=CHAR}, #{newImei,jdbcType=VARCHAR}, 
+      #{repairExpressCompany,jdbcType=VARCHAR}, #{repairExpressNo,jdbcType=VARCHAR}, 
+      #{repairExpressDate,jdbcType=TIMESTAMP}, #{uploadImage,jdbcType=VARCHAR}, #{repairCount,jdbcType=INTEGER}, 
+      #{recording,jdbcType=VARCHAR}, #{claimType,jdbcType=CHAR}, #{closeType,jdbcType=CHAR}, 
+      #{verifier,jdbcType=VARCHAR}, #{reopenType,jdbcType=CHAR}, #{operationType,jdbcType=CHAR}, 
+      #{isYes,jdbcType=CHAR}, #{isRepairBack,jdbcType=CHAR}, #{image,jdbcType=LONGVARCHAR}, 
+      #{damageImg,jdbcType=LONGVARCHAR}, #{repairEndImage,jdbcType=LONGVARCHAR}, #{repairFormImage,jdbcType=LONGVARCHAR}, 
+      #{reason,jdbcType=LONGVARCHAR}, #{otherReason,jdbcType=LONGVARCHAR}, #{newImage,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.form.entity.HtRepairClientForm" >
+    insert into ht_repair_client_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="formId != null" >
+        form_id,
+      </if>
+      <if test="contactStatus != null" >
+        contact_status,
+      </if>
+      <if test="againDate != null" >
+        again_date,
+      </if>
+      <if test="claimStatus != null" >
+        claim_status,
+      </if>
+      <if test="claimData != null" >
+        claim_data,
+      </if>
+      <if test="phoneBrand != null" >
+        phone_brand,
+      </if>
+      <if test="isQualified != null" >
+        is_qualified,
+      </if>
+      <if test="phoneType != null" >
+        phone_type,
+      </if>
+      <if test="phoneColor != null" >
+        phone_color,
+      </if>
+      <if test="isEnd != null" >
+        is_end,
+      </if>
+      <if test="mailDate != null" >
+        mail_date,
+      </if>
+      <if test="expressCompany != null" >
+        express_company,
+      </if>
+      <if test="expressNo != null" >
+        express_no,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="repairEndDate != null" >
+        repair_end_date,
+      </if>
+      <if test="otherPrice != null" >
+        other_price,
+      </if>
+      <if test="otherRemarks != null" >
+        other_remarks,
+      </if>
+      <if test="manHourPrice != null" >
+        man_hour_price,
+      </if>
+      <if test="selfPrice != null" >
+        self_price,
+      </if>
+      <if test="sumPrice != null" >
+        sum_price,
+      </if>
+      <if test="receiptType != null" >
+        receipt_type,
+      </if>
+      <if test="isAll != null" >
+        is_all,
+      </if>
+      <if test="equipmentTake != null" >
+        equipment_take,
+      </if>
+      <if test="newImei != null" >
+        new_imei,
+      </if>
+      <if test="repairExpressCompany != null" >
+        repair_express_company,
+      </if>
+      <if test="repairExpressNo != null" >
+        repair_express_no,
+      </if>
+      <if test="repairExpressDate != null" >
+        repair_express_date,
+      </if>
+      <if test="uploadImage != null" >
+        upload_image,
+      </if>
+      <if test="repairCount != null" >
+        repair_count,
+      </if>
+      <if test="recording != null" >
+        recording,
+      </if>
+      <if test="claimType != null" >
+        claim_type,
+      </if>
+      <if test="closeType != null" >
+        close_type,
+      </if>
+      <if test="verifier != null" >
+        verifier,
+      </if>
+      <if test="reopenType != null" >
+        reopen_type,
+      </if>
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="isYes != null" >
+        is_yes,
+      </if>
+      <if test="isRepairBack != null" >
+        is_repair_back,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="damageImg != null" >
+        damage_img,
+      </if>
+      <if test="repairEndImage != null" >
+        repair_end_image,
+      </if>
+      <if test="repairFormImage != null" >
+        repair_form_image,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="otherReason != null" >
+        other_reason,
+      </if>
+      <if test="newImage != null" >
+        new_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactStatus != null" >
+        #{contactStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="againDate != null" >
+        #{againDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claimStatus != null" >
+        #{claimStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="claimData != null" >
+        #{claimData,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneBrand != null" >
+        #{phoneBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="isQualified != null" >
+        #{isQualified,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneType != null" >
+        #{phoneType,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneColor != null" >
+        #{phoneColor,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnd != null" >
+        #{isEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="mailDate != null" >
+        #{mailDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expressCompany != null" >
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNo != null" >
+        #{expressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="repairEndDate != null" >
+        #{repairEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherPrice != null" >
+        #{otherPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="otherRemarks != null" >
+        #{otherRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="manHourPrice != null" >
+        #{manHourPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="selfPrice != null" >
+        #{selfPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="receiptType != null" >
+        #{receiptType,jdbcType=VARCHAR},
+      </if>
+      <if test="isAll != null" >
+        #{isAll,jdbcType=CHAR},
+      </if>
+      <if test="equipmentTake != null" >
+        #{equipmentTake,jdbcType=CHAR},
+      </if>
+      <if test="newImei != null" >
+        #{newImei,jdbcType=VARCHAR},
+      </if>
+      <if test="repairExpressCompany != null" >
+        #{repairExpressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="repairExpressNo != null" >
+        #{repairExpressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repairExpressDate != null" >
+        #{repairExpressDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadImage != null" >
+        #{uploadImage,jdbcType=VARCHAR},
+      </if>
+      <if test="repairCount != null" >
+        #{repairCount,jdbcType=INTEGER},
+      </if>
+      <if test="recording != null" >
+        #{recording,jdbcType=VARCHAR},
+      </if>
+      <if test="claimType != null" >
+        #{claimType,jdbcType=CHAR},
+      </if>
+      <if test="closeType != null" >
+        #{closeType,jdbcType=CHAR},
+      </if>
+      <if test="verifier != null" >
+        #{verifier,jdbcType=VARCHAR},
+      </if>
+      <if test="reopenType != null" >
+        #{reopenType,jdbcType=CHAR},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=CHAR},
+      </if>
+      <if test="isYes != null" >
+        #{isYes,jdbcType=CHAR},
+      </if>
+      <if test="isRepairBack != null" >
+        #{isRepairBack,jdbcType=CHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="damageImg != null" >
+        #{damageImg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="repairEndImage != null" >
+        #{repairEndImage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="repairFormImage != null" >
+        #{repairFormImage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherReason != null" >
+        #{otherReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="newImage != null" >
+        #{newImage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.form.entity.HtRepairClientForm" >
+    update ht_repair_client_form
+    <set >
+      <if test="formId != null" >
+        form_id = #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactStatus != null" >
+        contact_status = #{contactStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="againDate != null" >
+        again_date = #{againDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claimStatus != null" >
+        claim_status = #{claimStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="claimData != null" >
+        claim_data = #{claimData,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneBrand != null" >
+        phone_brand = #{phoneBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="isQualified != null" >
+        is_qualified = #{isQualified,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneType != null" >
+        phone_type = #{phoneType,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneColor != null" >
+        phone_color = #{phoneColor,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnd != null" >
+        is_end = #{isEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="mailDate != null" >
+        mail_date = #{mailDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expressCompany != null" >
+        express_company = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNo != null" >
+        express_no = #{expressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="repairEndDate != null" >
+        repair_end_date = #{repairEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherPrice != null" >
+        other_price = #{otherPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="otherRemarks != null" >
+        other_remarks = #{otherRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="manHourPrice != null" >
+        man_hour_price = #{manHourPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="selfPrice != null" >
+        self_price = #{selfPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null" >
+        sum_price = #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="receiptType != null" >
+        receipt_type = #{receiptType,jdbcType=VARCHAR},
+      </if>
+      <if test="isAll != null" >
+        is_all = #{isAll,jdbcType=CHAR},
+      </if>
+      <if test="equipmentTake != null" >
+        equipment_take = #{equipmentTake,jdbcType=CHAR},
+      </if>
+      <if test="newImei != null" >
+        new_imei = #{newImei,jdbcType=VARCHAR},
+      </if>
+      <if test="repairExpressCompany != null" >
+        repair_express_company = #{repairExpressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="repairExpressNo != null" >
+        repair_express_no = #{repairExpressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repairExpressDate != null" >
+        repair_express_date = #{repairExpressDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadImage != null" >
+        upload_image = #{uploadImage,jdbcType=VARCHAR},
+      </if>
+      <if test="repairCount != null" >
+        repair_count = #{repairCount,jdbcType=INTEGER},
+      </if>
+      <if test="recording != null" >
+        recording = #{recording,jdbcType=VARCHAR},
+      </if>
+      <if test="claimType != null" >
+        claim_type = #{claimType,jdbcType=CHAR},
+      </if>
+      <if test="closeType != null" >
+        close_type = #{closeType,jdbcType=CHAR},
+      </if>
+      <if test="verifier != null" >
+        verifier = #{verifier,jdbcType=VARCHAR},
+      </if>
+      <if test="reopenType != null" >
+        reopen_type = #{reopenType,jdbcType=CHAR},
+      </if>
+      <if test="operationType != null" >
+        operation_type = #{operationType,jdbcType=CHAR},
+      </if>
+      <if test="isYes != null" >
+        is_yes = #{isYes,jdbcType=CHAR},
+      </if>
+      <if test="isRepairBack != null" >
+        is_repair_back = #{isRepairBack,jdbcType=CHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="damageImg != null" >
+        damage_img = #{damageImg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="repairEndImage != null" >
+        repair_end_image = #{repairEndImage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="repairFormImage != null" >
+        repair_form_image = #{repairFormImage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherReason != null" >
+        other_reason = #{otherReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="newImage != null" >
+        new_image = #{newImage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dxt.ht.svc.form.entity.HtRepairClientForm" >
+    update ht_repair_client_form
+    set form_id = #{formId,jdbcType=VARCHAR},
+      contact_status = #{contactStatus,jdbcType=VARCHAR},
+      again_date = #{againDate,jdbcType=TIMESTAMP},
+      claim_status = #{claimStatus,jdbcType=VARCHAR},
+      claim_data = #{claimData,jdbcType=VARCHAR},
+      phone_brand = #{phoneBrand,jdbcType=VARCHAR},
+      is_qualified = #{isQualified,jdbcType=VARCHAR},
+      phone_type = #{phoneType,jdbcType=VARCHAR},
+      phone_color = #{phoneColor,jdbcType=VARCHAR},
+      is_end = #{isEnd,jdbcType=VARCHAR},
+      mail_date = #{mailDate,jdbcType=TIMESTAMP},
+      express_company = #{expressCompany,jdbcType=VARCHAR},
+      express_no = #{expressNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      repair_end_date = #{repairEndDate,jdbcType=TIMESTAMP},
+      other_price = #{otherPrice,jdbcType=DECIMAL},
+      other_remarks = #{otherRemarks,jdbcType=VARCHAR},
+      man_hour_price = #{manHourPrice,jdbcType=DECIMAL},
+      self_price = #{selfPrice,jdbcType=DECIMAL},
+      sum_price = #{sumPrice,jdbcType=DECIMAL},
+      receipt_type = #{receiptType,jdbcType=VARCHAR},
+      is_all = #{isAll,jdbcType=CHAR},
+      equipment_take = #{equipmentTake,jdbcType=CHAR},
+      new_imei = #{newImei,jdbcType=VARCHAR},
+      repair_express_company = #{repairExpressCompany,jdbcType=VARCHAR},
+      repair_express_no = #{repairExpressNo,jdbcType=VARCHAR},
+      repair_express_date = #{repairExpressDate,jdbcType=TIMESTAMP},
+      upload_image = #{uploadImage,jdbcType=VARCHAR},
+      repair_count = #{repairCount,jdbcType=INTEGER},
+      recording = #{recording,jdbcType=VARCHAR},
+      claim_type = #{claimType,jdbcType=CHAR},
+      close_type = #{closeType,jdbcType=CHAR},
+      verifier = #{verifier,jdbcType=VARCHAR},
+      reopen_type = #{reopenType,jdbcType=CHAR},
+      operation_type = #{operationType,jdbcType=CHAR},
+      is_yes = #{isYes,jdbcType=CHAR},
+      is_repair_back = #{isRepairBack,jdbcType=CHAR},
+      image = #{image,jdbcType=LONGVARCHAR},
+      damage_img = #{damageImg,jdbcType=LONGVARCHAR},
+      repair_end_image = #{repairEndImage,jdbcType=LONGVARCHAR},
+      repair_form_image = #{repairFormImage,jdbcType=LONGVARCHAR},
+      reason = #{reason,jdbcType=LONGVARCHAR},
+      other_reason = #{otherReason,jdbcType=LONGVARCHAR},
+      new_image = #{newImage,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.form.entity.HtRepairClientForm" >
+    update ht_repair_client_form
+    set form_id = #{formId,jdbcType=VARCHAR},
+      contact_status = #{contactStatus,jdbcType=VARCHAR},
+      again_date = #{againDate,jdbcType=TIMESTAMP},
+      claim_status = #{claimStatus,jdbcType=VARCHAR},
+      claim_data = #{claimData,jdbcType=VARCHAR},
+      phone_brand = #{phoneBrand,jdbcType=VARCHAR},
+      is_qualified = #{isQualified,jdbcType=VARCHAR},
+      phone_type = #{phoneType,jdbcType=VARCHAR},
+      phone_color = #{phoneColor,jdbcType=VARCHAR},
+      is_end = #{isEnd,jdbcType=VARCHAR},
+      mail_date = #{mailDate,jdbcType=TIMESTAMP},
+      express_company = #{expressCompany,jdbcType=VARCHAR},
+      express_no = #{expressNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      repair_end_date = #{repairEndDate,jdbcType=TIMESTAMP},
+      other_price = #{otherPrice,jdbcType=DECIMAL},
+      other_remarks = #{otherRemarks,jdbcType=VARCHAR},
+      man_hour_price = #{manHourPrice,jdbcType=DECIMAL},
+      self_price = #{selfPrice,jdbcType=DECIMAL},
+      sum_price = #{sumPrice,jdbcType=DECIMAL},
+      receipt_type = #{receiptType,jdbcType=VARCHAR},
+      is_all = #{isAll,jdbcType=CHAR},
+      equipment_take = #{equipmentTake,jdbcType=CHAR},
+      new_imei = #{newImei,jdbcType=VARCHAR},
+      repair_express_company = #{repairExpressCompany,jdbcType=VARCHAR},
+      repair_express_no = #{repairExpressNo,jdbcType=VARCHAR},
+      repair_express_date = #{repairExpressDate,jdbcType=TIMESTAMP},
+      upload_image = #{uploadImage,jdbcType=VARCHAR},
+      repair_count = #{repairCount,jdbcType=INTEGER},
+      recording = #{recording,jdbcType=VARCHAR},
+      claim_type = #{claimType,jdbcType=CHAR},
+      close_type = #{closeType,jdbcType=CHAR},
+      verifier = #{verifier,jdbcType=VARCHAR},
+      reopen_type = #{reopenType,jdbcType=CHAR},
+      operation_type = #{operationType,jdbcType=CHAR},
+      is_yes = #{isYes,jdbcType=CHAR},
+      is_repair_back = #{isRepairBack,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

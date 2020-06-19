@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dxt.ht.svc.product.dao.HtProductInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.product.entity.HtProductInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pro_name" jdbcType="VARCHAR" property="proName" />
+    <result column="pro_code" jdbcType="VARCHAR" property="proCode" />
+    <result column="category" jdbcType="CHAR" property="category" />
+    <result column="system_type" jdbcType="CHAR" property="systemType" />
+    <result column="product_type" jdbcType="CHAR" property="productType" />
+    <result column="price_flag" jdbcType="CHAR" property="priceFlag" />
+    <result column="maintain_standard" jdbcType="CHAR" property="maintainStandard" />
+    <result column="equity_url" jdbcType="VARCHAR" property="equityUrl" />
+    <result column="into_market_date" jdbcType="TIMESTAMP" property="intoMarketDate" />
+    <result column="exit_market_date" jdbcType="TIMESTAMP" property="exitMarketDate" />
+    <result column="min_price" jdbcType="DECIMAL" property="minPrice" />
+    <result column="max_price" jdbcType="DECIMAL" property="maxPrice" />
+    <result column="phone_model_id" jdbcType="VARCHAR" property="phoneModelId" />
+    <result column="maintenance_frequency" jdbcType="INTEGER" property="maintenanceFrequency" />
+    <result column="is_restrict" jdbcType="CHAR" property="isRestrict" />
+    <result column="restrict_price" jdbcType="DECIMAL" property="restrictPrice" />
+    <result column="insurance_restrict_price" jdbcType="DECIMAL" property="insuranceRestrictPrice" />
+    <result column="change_frequency" jdbcType="INTEGER" property="changeFrequency" />
+    <result column="change_condition" jdbcType="VARCHAR" property="changeCondition" />
+    <result column="change_payment" jdbcType="DECIMAL" property="changePayment" />
+    <result column="basis_depreciation" jdbcType="INTEGER" property="basisDepreciation" />
+    <result column="monthly_depreciation" jdbcType="INTEGER" property="monthlyDepreciation" />
+    <result column="serve_cost_price" jdbcType="DECIMAL" property="serveCostPrice" />
+    <result column="rate" jdbcType="INTEGER" property="rate" />
+    <result column="premium" jdbcType="DECIMAL" property="premium" />
+    <result column="suggested_retail_price" jdbcType="DECIMAL" property="suggestedRetailPrice" />
+    <result column="insurance_provider_id" jdbcType="VARCHAR" property="insuranceProviderId" />
+    <result column="intermediary_service_id" jdbcType="VARCHAR" property="intermediaryServiceId" />
+    <result column="excess_rate" jdbcType="VARCHAR" property="excessRate" />
+    <result column="fix_excess_rate" jdbcType="VARCHAR" property="fixExcessRate" />
+    <result column="insure_limit" jdbcType="VARCHAR" property="insureLimit" />
+    <result column="gua_limt" jdbcType="VARCHAR" property="guaLimt" />
+    <result column="is_start" jdbcType="CHAR" property="isStart" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="coverage" jdbcType="DECIMAL" property="coverage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pro_name, pro_code, category, system_type, product_type, price_flag, maintain_standard, 
+    equity_url, into_market_date, exit_market_date, min_price, max_price, phone_model_id, 
+    maintenance_frequency, is_restrict, restrict_price, insurance_restrict_price, change_frequency, 
+    change_condition, change_payment, basis_depreciation, monthly_depreciation, serve_cost_price, 
+    rate, premium, suggested_retail_price, insurance_provider_id, intermediary_service_id, 
+    excess_rate, fix_excess_rate, insure_limit, gua_limt, is_start, create_date, create_by, 
+    update_date, update_by, remark, status, coverage
+  </sql>
+
+    <select id="selectByProductIds" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ht_product_info
+        where id in
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

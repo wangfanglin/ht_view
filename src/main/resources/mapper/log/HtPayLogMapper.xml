@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.wx.log.dao.HtPayLogMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.wx.log.entity.HtPayLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="methods" property="methods" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dxt.ht.svc.wx.log.entity.HtPayLogWithBLOBs" extends="BaseResultMap" >
+    <result column="param" property="param" jdbcType="LONGVARCHAR" />
+    <result column="result" property="result" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, methods, create_date, order_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    param, result
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ht_pay_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ht_pay_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.wx.log.entity.HtPayLogWithBLOBs" >
+    insert into ht_pay_log (id, methods, create_date, 
+      order_id, param, result
+      )
+    values (#{id,jdbcType=INTEGER}, #{methods,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{orderId,jdbcType=VARCHAR}, #{param,jdbcType=LONGVARCHAR}, #{result,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.wx.log.entity.HtPayLogWithBLOBs" >
+    insert into ht_pay_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="methods != null" >
+        methods,
+      </if>
+        create_date,
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="param != null" >
+        param,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="methods != null" >
+        #{methods,jdbcType=VARCHAR},
+      </if>
+       NOW(),
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null" >
+        #{param,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.wx.log.entity.HtPayLogWithBLOBs" >
+    update ht_pay_log
+    <set >
+      <if test="methods != null" >
+        methods = #{methods,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null" >
+        param = #{param,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dxt.ht.svc.wx.log.entity.HtPayLogWithBLOBs" >
+    update ht_pay_log
+    set methods = #{methods,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      param = #{param,jdbcType=LONGVARCHAR},
+      result = #{result,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.wx.log.entity.HtPayLog" >
+    update ht_pay_log
+    set methods = #{methods,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      order_id = #{orderId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

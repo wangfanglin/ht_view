@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.form.dao.HtHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.form.entity.HtHistory" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="work_order_id" property="workOrderId" jdbcType="VARCHAR" />
+    <result column="form_id" property="formId" jdbcType="VARCHAR" />
+    <result column="form_type" property="formType" jdbcType="VARCHAR" />
+    <result column="after_activity_id" property="afterActivityId" jdbcType="VARCHAR" />
+    <result column="activity_id" property="activityId" jdbcType="VARCHAR" />
+    <result column="user_visible" property="userVisible" jdbcType="CHAR" />
+    <result column="operation_status" property="operationStatus" jdbcType="CHAR" />
+    <result column="cms_visible" property="cmsVisible" jdbcType="CHAR" />
+    <result column="dispose_user_id" property="disposeUserId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="hisRemark" property="remarks" jdbcType="VARCHAR" />
+    <result column="history_form_id" property="historyFormId" jdbcType="VARCHAR" />
+    <result column="uniqueness_id" property="uniquenessId" jdbcType="VARCHAR" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="after_activity_name" property="afterActivityName" jdbcType="VARCHAR" />
+    <result column="is_back" property="isBack" jdbcType="CHAR" />
+    <result column="exterior_id" property="exteriorId" jdbcType="CHAR" />
+            <association property="jsSysDictData" javaType="com.dxt.ht.svc.form.entity.JsSysDictData">
+                <id column="dict_code" property="dictCode" jdbcType="VARCHAR" />
+                <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+                <result column="parent_codes" property="parentCodes" jdbcType="VARCHAR" />
+                <result column="tree_sort" property="treeSort" jdbcType="DECIMAL" />
+                <result column="tree_sorts" property="treeSorts" jdbcType="VARCHAR" />
+                <result column="tree_leaf" property="treeLeaf" jdbcType="CHAR" />
+                <result column="tree_level" property="treeLevel" jdbcType="DECIMAL" />
+                <result column="tree_names" property="treeNames" jdbcType="VARCHAR" />
+                <result column="dict_label" property="dictLabel" jdbcType="VARCHAR" />
+                <result column="dict_value" property="dictValue" jdbcType="VARCHAR" />
+                <result column="dict_type" property="dictType" jdbcType="VARCHAR" />
+                <result column="is_sys" property="isSys" jdbcType="CHAR" />
+                <result column="description" property="description" jdbcType="VARCHAR" />
+                <result column="css_style" property="cssStyle" jdbcType="VARCHAR" />
+                <result column="css_class" property="cssClass" jdbcType="VARCHAR" />
+                <result column="status" property="status" jdbcType="CHAR" />
+                <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+                <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+                <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+                <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+                <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+                <result column="corp_code" property="corpCode" jdbcType="VARCHAR" />
+                <result column="corp_name" property="corpName" jdbcType="VARCHAR" />
+                <result column="extend_s1" property="extendS1" jdbcType="VARCHAR" />
+             </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    h.id, h.work_order_id, h.form_id, h.form_type, h.after_activity_id, h.activity_id, h.user_visible,
+    h.operation_status, h.cms_visible, h.dispose_user_id, h.status, h.create_by, h.create_date, h.update_by,
+    h.update_date, h.remarks as "hisRemark", h.history_form_id, h.uniqueness_id, h.activity_name, h.after_activity_name,
+    h.is_back,h.exterior_id
+  </sql>
+  <sql id="dict_column">
+    d.dict_code,  d.parent_code,  d.parent_codes,  d.tree_sort,  d.tree_sorts,  d.tree_leaf,  d.tree_level,
+    d.tree_names,  d.dict_label,  d.dict_value,  d.dict_type,  d.is_sys,  d.description,  d.css_style,  d.css_class,
+    d.status,  d.create_by,  d.create_date,  d.update_by,  d.update_date,  d.remarks,  d.corp_code,  d.corp_name,
+    d.extend_s1
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_history
+    where id = #{id,jdbcType=VARCHAR}ganjinfa
+  </select>
+  <select id="findHistList" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" />,<include refid="dict_column" />
+      FROM ht_history h,js_sys_dict_data d
+      WHERE h.operation_status = d.dict_value and work_order_id = #{formId} order by h.create_date desc
+  </select>
+    <select id="selectByIds" parameterType="java.util.List" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />,
+        <include refid="dict_column" />
+        FROM ht_history h inner join js_sys_dict_data d on h.operation_status = d.dict_value
+        WHERE h.user_visible = '1' and d.dict_type = 'manage_status' and work_order_id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+       order by h.create_date desc
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_history
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.form.entity.HtHistory" >
+    insert into ht_history (id, work_order_id, form_id, 
+      form_type, after_activity_id, activity_id, 
+      user_visible, operation_status, cms_visible, 
+      dispose_user_id, status, create_by, 
+      create_date, update_by, update_date, 
+      remarks, history_form_id, uniqueness_id, 
+      activity_name, after_activity_name, is_back
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workOrderId,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, 
+      #{formType,jdbcType=VARCHAR}, #{afterActivityId,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, 
+      #{userVisible,jdbcType=CHAR}, #{operationStatus,jdbcType=CHAR}, #{cmsVisible,jdbcType=CHAR}, 
+      #{disposeUserId,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{historyFormId,jdbcType=VARCHAR}, #{uniquenessId,jdbcType=VARCHAR}, 
+      #{activityName,jdbcType=VARCHAR}, #{afterActivityName,jdbcType=VARCHAR}, #{isBack,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.form.entity.HtHistory" >
+    insert into ht_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workOrderId != null" >
+        work_order_id,
+      </if>
+      <if test="formId != null" >
+        form_id,
+      </if>
+      <if test="formType != null" >
+        form_type,
+      </if>
+      <if test="afterActivityId != null" >
+        after_activity_id,
+      </if>
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="userVisible != null" >
+        user_visible,
+      </if>
+      <if test="operationStatus != null" >
+        operation_status,
+      </if>
+      <if test="cmsVisible != null" >
+        cms_visible,
+      </if>
+      <if test="disposeUserId != null" >
+        dispose_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="historyFormId != null" >
+        history_form_id,
+      </if>
+      <if test="uniquenessId != null" >
+        uniqueness_id,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="afterActivityName != null" >
+        after_activity_name,
+      </if>
+      <if test="isBack != null" >
+        is_back,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workOrderId != null" >
+        #{workOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="formType != null" >
+        #{formType,jdbcType=VARCHAR},
+      </if>
+      <if test="afterActivityId != null" >
+        #{afterActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null" >
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="userVisible != null" >
+        #{userVisible,jdbcType=CHAR},
+      </if>
+      <if test="operationStatus != null" >
+        #{operationStatus,jdbcType=CHAR},
+      </if>
+      <if test="cmsVisible != null" >
+        #{cmsVisible,jdbcType=CHAR},
+      </if>
+      <if test="disposeUserId != null" >
+        #{disposeUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="historyFormId != null" >
+        #{historyFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquenessId != null" >
+        #{uniquenessId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="afterActivityName != null" >
+        #{afterActivityName,jdbcType=VARCHAR},
+      </if>
+      <if test="isBack != null" >
+        #{isBack,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.form.entity.HtHistory" >
+    update ht_history
+    <set >
+      <if test="workOrderId != null" >
+        work_order_id = #{workOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null" >
+        form_id = #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="formType != null" >
+        form_type = #{formType,jdbcType=VARCHAR},
+      </if>
+      <if test="afterActivityId != null" >
+        after_activity_id = #{afterActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="userVisible != null" >
+        user_visible = #{userVisible,jdbcType=CHAR},
+      </if>
+      <if test="operationStatus != null" >
+        operation_status = #{operationStatus,jdbcType=CHAR},
+      </if>
+      <if test="cmsVisible != null" >
+        cms_visible = #{cmsVisible,jdbcType=CHAR},
+      </if>
+      <if test="disposeUserId != null" >
+        dispose_user_id = #{disposeUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="historyFormId != null" >
+        history_form_id = #{historyFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquenessId != null" >
+        uniqueness_id = #{uniquenessId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="afterActivityName != null" >
+        after_activity_name = #{afterActivityName,jdbcType=VARCHAR},
+      </if>
+      <if test="isBack != null" >
+        is_back = #{isBack,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateOperationStatusByPrimaryKeySelective" parameterType="com.dxt.ht.svc.form.entity.HtHistory" >
+        update ht_history
+        <set >
+            <if test="operationStatus != null" >
+                operation_status = #{operationStatus,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.form.entity.HtHistory" >
+    update ht_history
+    set work_order_id = #{workOrderId,jdbcType=VARCHAR},
+      form_id = #{formId,jdbcType=VARCHAR},
+      form_type = #{formType,jdbcType=VARCHAR},
+      after_activity_id = #{afterActivityId,jdbcType=VARCHAR},
+      activity_id = #{activityId,jdbcType=VARCHAR},
+      user_visible = #{userVisible,jdbcType=CHAR},
+      operation_status = #{operationStatus,jdbcType=CHAR},
+      cms_visible = #{cmsVisible,jdbcType=CHAR},
+      dispose_user_id = #{disposeUserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      history_form_id = #{historyFormId,jdbcType=VARCHAR},
+      uniqueness_id = #{uniquenessId,jdbcType=VARCHAR},
+      activity_name = #{activityName,jdbcType=VARCHAR},
+      after_activity_name = #{afterActivityName,jdbcType=VARCHAR},
+      is_back = #{isBack,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectFormOperation" resultType="java.lang.String">
+      SELECT reason FROM ht_form_operation where id = #{uniquenessId}
+  </select>
+  <select id="getRepairClient" resultType="java.util.Map">
+    SELECT repair_end_date,remarks,self_price FROM ht_repair_client_history where id = #{historyFormId}
+  </select>
+
+    <select id="selectHtRenewHistoryById" resultType="java.lang.String">
+  select FORMAT(((case when self_price is null then 0 else self_price end ) + (case when other_price is null then 0 else other_price end) ) /100 ,2) as "totalPrice"
+  from ht_history h
+  left join ht_renew_history r on h.history_form_id= r.id
+  where h.id = #{historyId}
+  </select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.product.dao.HtGroupProductChildMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.product.entity.HtGroupProductChild" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="is_immediately" property="isImmediately" jdbcType="CHAR" />
+    <result column="take_day" property="takeDay" jdbcType="INTEGER" />
+    <result column="validity" property="validity" jdbcType="INTEGER" />
+    <result column="change_frequency" property="changeFrequency" jdbcType="CHAR" />
+    <result column="remain_coverage" property="remainCoverage" jdbcType="CHAR" />
+    <result column="serve_validity" property="serveValidity" jdbcType="CHAR" />
+    <result column="maintenance_frequency" property="maintenanceFrequency" jdbcType="CHAR" />
+    <result column="Maintenance_amount" property="maintenanceAmount" jdbcType="CHAR" />
+    <result column="recover_frequency" property="recoverFrequency" jdbcType="CHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="reamrk" property="reamrk" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="effect_time" property="effectTime" jdbcType="TIMESTAMP" />
+    <result column="termination_rules_sketch" property="terminationRulesSketch" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_id, is_immediately, take_day, validity, change_frequency, remain_coverage, 
+    serve_validity, maintenance_frequency, Maintenance_amount, recover_frequency, create_date, 
+    create_by, update_date, update_by, reamrk, status, effect_time, termination_rules_sketch
+  </sql>
+    <sql id="Base_Column_List_cond" >
+    id as "id", product_id as "productId", is_immediately as "isImmediately", take_day as "takeDay", validity as "validity", change_frequency as "changeFrequency", remain_coverage as "remainCoverage",
+    serve_validity as "serveValidity", maintenance_frequency AS "maintenanceFrequency", Maintenance_amount AS "MaintenanceAmount", recover_frequency AS "recoverFrequency", create_date AS "createDate",
+    create_by AS "createBy", update_date AS "updateDate", update_by AS "updateBy", reamrk AS "reamrk", status AS "status", effect_time AS "effectTime", termination_rules_sketch as "terminationRulesSketch"
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_group_product_child
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectByIds" parameterType="java.util.List" resultType="com.dxt.ht.svc.product.entity.HtGroupProductChild" >
+        SELECT
+        <include refid="Base_Column_List_cond" />
+        FROM ht_group_product_child
+        WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

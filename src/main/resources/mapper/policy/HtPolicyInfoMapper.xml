@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.policy.dao.HtPolicyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.policy.entity.HtPolicyInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="unique_mark" property="uniqueMark" jdbcType="VARCHAR" />
+    <result column="str_name" property="strName" jdbcType="VARCHAR" />
+    <result column="str_contact_num" property="strContactNum" jdbcType="CHAR" />
+    <result column="str_type" property="strType" jdbcType="VARCHAR" />
+    <result column="str_weChat" property="strWechat" jdbcType="VARCHAR" />
+    <result column="str_card_id" property="strCardId" jdbcType="VARCHAR" />
+    <result column="date_birthday" property="dateBirthday" jdbcType="TIMESTAMP" />
+    <result column="str_sex" property="strSex" jdbcType="VARCHAR" />
+    <result column="str_filiale" property="strFiliale" jdbcType="VARCHAR" />
+    <result column="str_filiale" property="strFiliale" jdbcType="VARCHAR" />
+    <result column="str_channel_name" property="strChannelName" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="channel_product_name" property="channelProductName" jdbcType="VARCHAR" />
+    <result column="int_product_price" property="intProductPrice" jdbcType="INTEGER" />
+    <result column="coverage" property="coverage" jdbcType="DECIMAL" />
+    <result column="int_sell_price" property="intSellPrice" jdbcType="INTEGER" />
+    <result column="date_cost_time" property="dateCostTime" jdbcType="TIMESTAMP" />
+    <result column="str_province" property="strProvince" jdbcType="VARCHAR" />
+    <result column="str_card_number" property="strCardNumber" jdbcType="VARCHAR" />
+    <result column="date_buy_card" property="dateBuyCard" jdbcType="TIMESTAMP" />
+    <result column="date_effective_date" property="dateEffectiveDate" jdbcType="TIMESTAMP" />
+    <result column="str_buy_pattern" property="strBuyPattern" jdbcType="VARCHAR" />
+    <result column="date_end_date" property="dateEndDate" jdbcType="TIMESTAMP" />
+    <result column="str_sys" property="strSys" jdbcType="VARCHAR" />
+    <result column="str_phone_brand" property="strPhoneBrand" jdbcType="VARCHAR" />
+    <result column="str_color" property="strColor" jdbcType="CHAR" />
+    <result column="str_phone_model" property="strPhoneModel" jdbcType="VARCHAR" />
+    <result column="str_city" property="strCity" jdbcType="VARCHAR" />
+    <result column="int_internal" property="intInternal" jdbcType="INTEGER" />
+    <result column="str_store" property="strStore" jdbcType="VARCHAR" />
+    <result column="str_imei_num" property="strImeiNum" jdbcType="VARCHAR" />
+    <result column="str_salesman" property="strSalesman" jdbcType="VARCHAR" />
+    <result column="int_loan_amount" property="intLoanAmount" jdbcType="INTEGER" />
+    <result column="int_batch_num" property="intBatchNum" jdbcType="INTEGER" />
+    <result column="int_status" property="intStatus" jdbcType="INTEGER" />
+    <result column="str_card_type" property="strCardType" jdbcType="VARCHAR" />
+    <result column="channel_product_id" property="channelProductId" jdbcType="VARCHAR" />
+    <result column="policy_submission_date" property="policySubmissionDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="delFlag" property="delflag" jdbcType="CHAR" />
+    <result column="invite" property="invite" jdbcType="VARCHAR" />
+    <result column="inviteflag" property="inviteflag" jdbcType="CHAR" />
+    <result column="fromType" property="fromtype" jdbcType="CHAR" />
+    <result column="bhStauts" property="bhstauts" jdbcType="INTEGER" />
+    <result column="callGuKe" property="callguke" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="external_identifier" property="externalIdentifier" jdbcType="VARCHAR" />
+    <result column="bh_flag" property="bhFlag" jdbcType="VARCHAR" />
+    <result column="insurance_periods" property="insurancePeriods" jdbcType="VARCHAR" />
+    <result column="surplus_coverage" property="surplusCoverage" jdbcType="DECIMAL" />
+    <result column="processState" property="processState" jdbcType="VARCHAR" />
+    <result column="policy_status" property="policyStatus" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+      <association property="htPolicyDetail" javaType="com.dxt.ht.svc.policy.entity.HtPolicyDetail">
+          <id column="policy_id" property="policyId" jdbcType="VARCHAR" />
+          <result column="coverage" property="coverage" jdbcType="DECIMAL" />
+          <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+          <result column="validity" property="validity" jdbcType="INTEGER" />
+          <result column="effect_time" property="effectTime" jdbcType="TIMESTAMP" />
+          <result column="change_frequency" property="changeFrequency" jdbcType="CHAR" />
+          <result column="remain_coverage" property="remainCoverage" jdbcType="CHAR" />
+          <result column="serve_validity" property="serveValidity" jdbcType="CHAR" />
+          <result column="maintenance_frequency" property="maintenanceFrequency" jdbcType="CHAR" />
+          <result column="maintenance_amount" property="maintenanceAmount" jdbcType="CHAR" />
+          <result column="recover_frequency" property="recoverFrequency" jdbcType="CHAR" />
+      </association>
+      <association  property="htChannelProductInfo" javaType="com.dxt.ht.svc.product.entity.HtChannelProductInfo" >
+          <id column="channel_product_id" property="id" jdbcType="VARCHAR" />
+          <result column="code" property="code" jdbcType="VARCHAR" />
+          <result column="distribution_name" property="distributionName" jdbcType="VARCHAR" />
+          <result column="distribution_id" property="distributionId" jdbcType="VARCHAR" />
+          <result column="name" property="name" jdbcType="VARCHAR" />
+          <result column="data_transfer_type" property="dataTransferType" jdbcType="CHAR" />
+          <result column="serve_cost_price" property="serveCostPrice" jdbcType="DECIMAL" />
+          <result column="rate" property="rate" jdbcType="DECIMAL" />
+          <result column="premium" property="premium" jdbcType="DECIMAL" />
+          <result column="suggested_retail_price" property="suggestedRetailPrice" jdbcType="DECIMAL" />
+          <result column="intermediary_service_id" property="intermediaryServiceId" jdbcType="VARCHAR" />
+          <result column="is_start" property="isStart" jdbcType="CHAR" />
+          <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+          <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+          <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+          <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+          <result column="reamrk" property="reamrk" jdbcType="VARCHAR" />
+          <result column="status" property="status" jdbcType="CHAR" />
+          <result column="group_product_id" property="groupProductId" jdbcType="VARCHAR" />
+      </association>
+      <association property="htBrandInfo" column="postCode" javaType="com.dxt.ht.svc.product.entity.HtBrandInfo">
+          <id column="str_phone_brand" property="id" jdbcType="VARCHAR" />
+          <result column="brandName" property="name" jdbcType="VARCHAR" />
+          <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+          <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+          <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+          <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+          <result column="remark" property="remark" jdbcType="VARCHAR" />
+          <result column="status" property="status" jdbcType="CHAR" />
+        </association>
+          <association property="htPhoneModelInfo" javaType="com.dxt.ht.svc.product.entity.HtPhoneModelInfo">
+              <id column="str_phone_model" property="id" jdbcType="VARCHAR" />
+              <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
+              <result column="distribution_id" property="distributionId" jdbcType="VARCHAR" />
+              <result column="model" property="model" jdbcType="VARCHAR" />
+              <result column="price_low" property="priceLow" jdbcType="DECIMAL" />
+              <result column="price_high" property="priceHigh" jdbcType="DECIMAL" />
+              <result column="phone_price" property="phonePrice" jdbcType="DECIMAL" />
+              <result column="screen_price" property="screenPrice" jdbcType="DECIMAL" />
+              <result column="sort" property="sort" jdbcType="INTEGER" />
+              <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+              <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+              <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+              <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+              <result column="remark" property="remark" jdbcType="VARCHAR" />
+              <result column="status" property="status" jdbcType="CHAR" />
+          </association>
+          <association property="htFormInfo" javaType="com.dxt.ht.svc.form.entity.HtFormInfo" >
+              <id column="id" property="id" jdbcType="VARCHAR" />
+              <result column="policy_id" property="policyId" jdbcType="VARCHAR" />
+              <result column="manage_status" property="manageStatus" jdbcType="VARCHAR" />
+              <result column="form_status" property="formStatus" jdbcType="VARCHAR" />
+              <result column="form_type" property="formType" jdbcType="VARCHAR" />
+              <result column="status" property="status" jdbcType="CHAR" />
+              <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+              <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+              <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+              <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+              <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+              <result column="is_automatic" property="isAutomatic" jdbcType="CHAR" />
+              <result column="office_id" property="officeId" jdbcType="VARCHAR" />
+              <result column="is_run" property="isRun" jdbcType="CHAR" />
+          </association>
+          <association property="htReceiptData" javaType="com.dxt.ht.svc.form.entity.HtReceiptData" >
+              <id column="id" property="id" jdbcType="VARCHAR" />
+              <result column="form_id" property="formId" jdbcType="VARCHAR" />
+              <result column="bd_id" property="bdId" jdbcType="VARCHAR" />
+              <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+              <result column="bank_number" property="bankNumber" jdbcType="VARCHAR" />
+              <result column="bh_report_no" property="bhReportNo" jdbcType="VARCHAR" />
+              <result column="payee_name" property="payeeName" jdbcType="VARCHAR" />
+              <result column="payee_id_number" property="payeeIdNumber" jdbcType="VARCHAR" />
+              <result column="audit_status" property="auditStatus" jdbcType="CHAR" />
+              <result column="pass_back" property="passBack" jdbcType="CHAR" />
+              <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+              <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+              <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+              <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+              <result column="remark" property="remark" jdbcType="VARCHAR" />
+              <result column="province_code" property="provinceCode" jdbcType="VARCHAR" />
+              <result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+              <result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+              <result column="bank_type" property="bankType" jdbcType="VARCHAR" />
+              <result column="band_img" property="bandImg" jdbcType="VARCHAR" />
+              <result column="keep_img" property="keepImg" jdbcType="VARCHAR" />
+              <result column="insurance_number" property="insuranceNumber" jdbcType="VARCHAR" />
+              <result column="status" property="status" jdbcType="CHAR" />
+              <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP" />
+              <result column="examine_date" property="examineDate" jdbcType="TIMESTAMP" />
+          </association>
+      <association property="htClaimDisqualificationLog" javaType="com.dxt.ht.svc.form.entity.HtClaimDisqualificationLog" >
+          <id column="id" property="id" jdbcType="VARCHAR" />
+          <result column="form_id" property="formId" jdbcType="VARCHAR" />
+          <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+          <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+          <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+          <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+          <result column="remark" property="remark" jdbcType="VARCHAR" />
+          <result column="status" property="status" jdbcType="CHAR" />
+      </association>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    h.id, h.unique_mark, h.str_name, h.str_contact_num, h.str_type, h.str_weChat, h.str_card_id, h.date_birthday,
+    h.str_sex, h.str_filiale, h.str_channel_name, h.channel_id, h.channel_product_name, h.int_product_price,
+    h.coverage, h.int_sell_price, h.date_cost_time, h.str_province, h.str_card_number, h.date_buy_card,
+    h.date_effective_date, h.str_buy_pattern, h.date_end_date, h.str_sys, h.str_phone_brand, h.str_color,
+    h.str_phone_model, h.str_city, h.int_internal, h.str_store, h.str_imei_num, h.str_salesman, h.int_loan_amount,
+    h.int_batch_num, h.int_status, h.str_card_type, h.channel_product_id, h.policy_submission_date,
+    h.create_by, h.create_date, h.update_by, h.update_date, h.status, h.remarks, h.delFlag, h.invite,
+    h.inviteflag, h.fromType, h.bhStauts, h.callGuKe, h.openid, h.external_identifier, h.bh_flag, h.insurance_periods,
+    h.surplus_coverage,h.policy_status,h.user_id
+  </sql>
+
+    <sql id = "Process_State">
+        case
+          when now() between h.date_effective_date and h.date_end_date  then 0
+          when now() > h.date_end_date then 2
+          when h.date_effective_date > now() then 1
+        end as 'processState'
+    </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+
+    SELECT <include refid="Base_Column_List"/>,p.name,b.`name` as 'brandName',m.model,
+      <include refid="Process_State"/>
+      FROM ht_policy_info h
+      LEFT JOIN ht_channel_product_info p ON h.channel_product_id = p.id
+      LEFT JOIN ht_brand_info b ON h.str_phone_brand = b.id
+      LEFT JOIN ht_phone_model_info m ON h.str_phone_model = m.id
+    where h.id = #{policyId,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectByFormId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        SELECT <include refid="Base_Column_List"/>,hpi.name,hbi.name as 'brandName',hpmi.model,hfi.* FROM ht_policy_info h
+        LEFT JOIN ht_channel_product_info hpi ON h.channel_product_id = hpi.id
+        LEFT JOIN ht_brand_info hbi ON h.str_phone_brand = hbi.id
+        LEFT JOIN ht_phone_model_info hpmi ON h.str_phone_model = hpmi.id
+        LEFT JOIN ht_form_info hfi on h.id = hfi.policy_id
+        where hfi.id = #{formId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectReceiptByFormId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        SELECT <include refid="Base_Column_List"/>,hpi.name,hbi.name as 'brandName',hpmi.model,hrd.* FROM ht_policy_info h
+        LEFT JOIN ht_channel_product_info hpi ON h.channel_product_id = hpi.id
+        LEFT JOIN ht_brand_info hbi ON h.str_phone_brand = hbi.id
+        LEFT JOIN ht_phone_model_info hpmi ON h.str_phone_model = hpmi.id
+        LEFT JOIN ht_form_info hfi on h.id = hfi.policy_id
+        LEFT JOIN ht_receipt_data hrd on h.id  = hrd.insurance_number
+        where hfi.id = #{formId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findPolicyList" resultMap="BaseResultMap" parameterType="PolicyInfoListEntity">
+        SELECT h.*,p.name,b.`name` as 'brandName',m.model,
+        <include refid="Process_State"/>
+        FROM ht_policy_info h
+        LEFT JOIN ht_channel_product_info p ON h.channel_product_id = p.id
+        LEFT JOIN ht_brand_info b ON h.str_phone_brand = b.id
+        LEFT JOIN ht_phone_model_info m ON h.str_phone_model = m.id
+        where 1=1
+        <if test="userId != null and userId !=''" >
+          and h.user_id = #{userId}
+        </if>
+        <if test="quertType != null and quertType !='' and quertType == '1'.toString()" >
+          and h.str_imei_num = #{queryParam}
+        </if>
+        <if test="quertType != null and quertType !='' and quertType == '2'.toString()" >
+          and h.str_contact_num = #{queryParam}
+        </if>
+        <if test="quertType != null and quertType !='' and quertType == '3'.toString()" >
+          and h.str_card_id = #{queryParam}
+        </if>
+        order by h.create_date desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_policy_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.policy.entity.HtPolicyInfo" >
+    insert into ht_policy_info (id, unique_mark, str_name, 
+      str_contact_num, str_type, str_weChat, 
+      str_card_id, date_birthday, str_sex, 
+      str_filiale, str_channel_name, channel_id,
+      channel_product_name, int_product_price, coverage, 
+      int_sell_price, date_cost_time, str_province, 
+      str_card_number, date_buy_card, date_effective_date, 
+      str_buy_pattern, date_end_date, str_sys, 
+      str_phone_brand, str_color, str_phone_model, 
+      str_city, int_internal, str_store, 
+      str_imei_num, str_salesman, int_loan_amount, 
+      int_batch_num, int_status, str_card_type, 
+      channel_product_id, policy_submission_date, 
+      create_by, create_date, update_by, 
+      update_date, status, remarks, 
+      delFlag, invite, inviteflag, 
+      fromType, bhStauts, callGuKe, 
+      openid, external_identifier, bh_flag, 
+      insurance_periods, surplus_coverage)
+    values (#{id,jdbcType=VARCHAR}, #{uniqueMark,jdbcType=VARCHAR}, #{strName,jdbcType=VARCHAR}, 
+      #{strContactNum,jdbcType=CHAR}, #{strType,jdbcType=VARCHAR}, #{strWechat,jdbcType=VARCHAR}, 
+      #{strCardId,jdbcType=VARCHAR}, #{dateBirthday,jdbcType=TIMESTAMP}, #{strSex,jdbcType=VARCHAR}, 
+      #{strFiliale,jdbcType=VARCHAR}, #{strChannelName,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, 
+      #{channelProductName,jdbcType=VARCHAR}, #{intProductPrice,jdbcType=INTEGER}, #{coverage,jdbcType=DECIMAL}, 
+      #{intSellPrice,jdbcType=INTEGER}, #{dateCostTime,jdbcType=TIMESTAMP}, #{strProvince,jdbcType=VARCHAR}, 
+      #{strCardNumber,jdbcType=VARCHAR}, #{dateBuyCard,jdbcType=TIMESTAMP}, #{dateEffectiveDate,jdbcType=TIMESTAMP}, 
+      #{strBuyPattern,jdbcType=VARCHAR}, #{dateEndDate,jdbcType=TIMESTAMP}, #{strSys,jdbcType=VARCHAR}, 
+      #{strPhoneBrand,jdbcType=VARCHAR}, #{strColor,jdbcType=CHAR}, #{strPhoneModel,jdbcType=VARCHAR}, 
+      #{strCity,jdbcType=VARCHAR}, #{intInternal,jdbcType=INTEGER}, #{strStore,jdbcType=VARCHAR}, 
+      #{strImeiNum,jdbcType=VARCHAR}, #{strSalesman,jdbcType=VARCHAR}, #{intLoanAmount,jdbcType=INTEGER}, 
+      #{intBatchNum,jdbcType=INTEGER}, #{intStatus,jdbcType=INTEGER}, #{strCardType,jdbcType=VARCHAR}, 
+      #{channelProductId,jdbcType=VARCHAR}, #{policySubmissionDate,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=CHAR}, #{invite,jdbcType=VARCHAR}, #{inviteflag,jdbcType=CHAR}, 
+      #{fromtype,jdbcType=CHAR}, #{bhstauts,jdbcType=INTEGER}, #{callguke,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{externalIdentifier,jdbcType=VARCHAR}, #{bhFlag,jdbcType=VARCHAR}, 
+      #{insurancePeriods,jdbcType=VARCHAR}, #{surplusCoverage,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.policy.entity.HtPolicyInfo" >
+    insert into ht_policy_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uniqueMark != null" >
+        unique_mark,
+      </if>
+      <if test="strName != null" >
+        str_name,
+      </if>
+      <if test="strContactNum != null" >
+        str_contact_num,
+      </if>
+      <if test="strType != null" >
+        str_type,
+      </if>
+      <if test="strWechat != null" >
+        str_weChat,
+      </if>
+      <if test="strCardId != null" >
+        str_card_id,
+      </if>
+      <if test="dateBirthday != null" >
+        date_birthday,
+      </if>
+      <if test="strSex != null" >
+        str_sex,
+      </if>
+      <if test="strFiliale != null" >
+        str_filiale,
+      </if>
+      <if test="strChannelName != null" >
+        str_channel_name,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="channelProductName != null" >
+        channel_product_name,
+      </if>
+      <if test="intProductPrice != null" >
+        int_product_price,
+      </if>
+      <if test="coverage != null" >
+        coverage,
+      </if>
+      <if test="intSellPrice != null" >
+        int_sell_price,
+      </if>
+      <if test="dateCostTime != null" >
+        date_cost_time,
+      </if>
+      <if test="strProvince != null" >
+        str_province,
+      </if>
+      <if test="strCardNumber != null" >
+        str_card_number,
+      </if>
+      <if test="dateBuyCard != null" >
+        date_buy_card,
+      </if>
+      <if test="dateEffectiveDate != null" >
+        date_effective_date,
+      </if>
+      <if test="strBuyPattern != null" >
+        str_buy_pattern,
+      </if>
+      <if test="dateEndDate != null" >
+        date_end_date,
+      </if>
+      <if test="strSys != null" >
+        str_sys,
+      </if>
+      <if test="strPhoneBrand != null" >
+        str_phone_brand,
+      </if>
+      <if test="strColor != null" >
+        str_color,
+      </if>
+      <if test="strPhoneModel != null" >
+        str_phone_model,
+      </if>
+      <if test="strCity != null" >
+        str_city,
+      </if>
+      <if test="intInternal != null" >
+        int_internal,
+      </if>
+      <if test="strStore != null" >
+        str_store,
+      </if>
+      <if test="strImeiNum != null" >
+        str_imei_num,
+      </if>
+      <if test="strSalesman != null" >
+        str_salesman,
+      </if>
+      <if test="intLoanAmount != null" >
+        int_loan_amount,
+      </if>
+      <if test="intBatchNum != null" >
+        int_batch_num,
+      </if>
+      <if test="intStatus != null" >
+        int_status,
+      </if>
+      <if test="strCardType != null" >
+        str_card_type,
+      </if>
+      <if test="channelProductId != null" >
+        channel_product_id,
+      </if>
+      <if test="policySubmissionDate != null" >
+        policy_submission_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delflag != null" >
+        delFlag,
+      </if>
+      <if test="invite != null" >
+        invite,
+      </if>
+      <if test="inviteflag != null" >
+        inviteflag,
+      </if>
+      <if test="fromtype != null" >
+        fromType,
+      </if>
+      <if test="bhstauts != null" >
+        bhStauts,
+      </if>
+      <if test="callguke != null" >
+        callGuKe,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="externalIdentifier != null" >
+        external_identifier,
+      </if>
+      <if test="bhFlag != null" >
+        bh_flag,
+      </if>
+      <if test="insurancePeriods != null" >
+        insurance_periods,
+      </if>
+      <if test="surplusCoverage != null" >
+        surplus_coverage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uniqueMark != null" >
+        #{uniqueMark,jdbcType=VARCHAR},
+      </if>
+      <if test="strName != null" >
+        #{strName,jdbcType=VARCHAR},
+      </if>
+      <if test="strContactNum != null" >
+        #{strContactNum,jdbcType=CHAR},
+      </if>
+      <if test="strType != null" >
+        #{strType,jdbcType=VARCHAR},
+      </if>
+      <if test="strWechat != null" >
+        #{strWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="strCardId != null" >
+        #{strCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateBirthday != null" >
+        #{dateBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strSex != null" >
+        #{strSex,jdbcType=VARCHAR},
+      </if>
+      <if test="strFiliale != null" >
+        #{strFiliale,jdbcType=VARCHAR},
+      </if>
+      <if test="strChannelName != null" >
+        #{strChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelProductName != null" >
+        #{channelProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="intProductPrice != null" >
+        #{intProductPrice,jdbcType=INTEGER},
+      </if>
+      <if test="coverage != null" >
+        #{coverage,jdbcType=DECIMAL},
+      </if>
+      <if test="intSellPrice != null" >
+        #{intSellPrice,jdbcType=INTEGER},
+      </if>
+      <if test="dateCostTime != null" >
+        #{dateCostTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strProvince != null" >
+        #{strProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="strCardNumber != null" >
+        #{strCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dateBuyCard != null" >
+        #{dateBuyCard,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateEffectiveDate != null" >
+        #{dateEffectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strBuyPattern != null" >
+        #{strBuyPattern,jdbcType=VARCHAR},
+      </if>
+      <if test="dateEndDate != null" >
+        #{dateEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strSys != null" >
+        #{strSys,jdbcType=VARCHAR},
+      </if>
+      <if test="strPhoneBrand != null" >
+        #{strPhoneBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="strColor != null" >
+        #{strColor,jdbcType=CHAR},
+      </if>
+      <if test="strPhoneModel != null" >
+        #{strPhoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="strCity != null" >
+        #{strCity,jdbcType=VARCHAR},
+      </if>
+      <if test="intInternal != null" >
+        #{intInternal,jdbcType=INTEGER},
+      </if>
+      <if test="strStore != null" >
+        #{strStore,jdbcType=VARCHAR},
+      </if>
+      <if test="strImeiNum != null" >
+        #{strImeiNum,jdbcType=VARCHAR},
+      </if>
+      <if test="strSalesman != null" >
+        #{strSalesman,jdbcType=VARCHAR},
+      </if>
+      <if test="intLoanAmount != null" >
+        #{intLoanAmount,jdbcType=INTEGER},
+      </if>
+      <if test="intBatchNum != null" >
+        #{intBatchNum,jdbcType=INTEGER},
+      </if>
+      <if test="intStatus != null" >
+        #{intStatus,jdbcType=INTEGER},
+      </if>
+      <if test="strCardType != null" >
+        #{strCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelProductId != null" >
+        #{channelProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="policySubmissionDate != null" >
+        #{policySubmissionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=CHAR},
+      </if>
+      <if test="invite != null" >
+        #{invite,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteflag != null" >
+        #{inviteflag,jdbcType=CHAR},
+      </if>
+      <if test="fromtype != null" >
+        #{fromtype,jdbcType=CHAR},
+      </if>
+      <if test="bhstauts != null" >
+        #{bhstauts,jdbcType=INTEGER},
+      </if>
+      <if test="callguke != null" >
+        #{callguke,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="externalIdentifier != null" >
+        #{externalIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="bhFlag != null" >
+        #{bhFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="insurancePeriods != null" >
+        #{insurancePeriods,jdbcType=VARCHAR},
+      </if>
+      <if test="surplusCoverage != null" >
+        #{surplusCoverage,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.policy.entity.HtPolicyInfo" >
+    update ht_policy_info
+    <set >
+      <if test="uniqueMark != null" >
+        unique_mark = #{uniqueMark,jdbcType=VARCHAR},
+      </if>
+      <if test="strName != null" >
+        str_name = #{strName,jdbcType=VARCHAR},
+      </if>
+      <if test="strContactNum != null" >
+        str_contact_num = #{strContactNum,jdbcType=CHAR},
+      </if>
+      <if test="strType != null" >
+        str_type = #{strType,jdbcType=VARCHAR},
+      </if>
+      <if test="strWechat != null" >
+        str_weChat = #{strWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="strCardId != null" >
+        str_card_id = #{strCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateBirthday != null" >
+        date_birthday = #{dateBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strSex != null" >
+        str_sex = #{strSex,jdbcType=VARCHAR},
+      </if>
+      <if test="strFiliale != null" >
+        str_filiale = #{strFiliale,jdbcType=VARCHAR},
+      </if>
+      <if test="strChannelName != null" >
+        str_channel_name = #{strChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelProductName != null" >
+        channel_product_name = #{channelProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="intProductPrice != null" >
+        int_product_price = #{intProductPrice,jdbcType=INTEGER},
+      </if>
+      <if test="coverage != null" >
+        coverage = #{coverage,jdbcType=DECIMAL},
+      </if>
+      <if test="intSellPrice != null" >
+        int_sell_price = #{intSellPrice,jdbcType=INTEGER},
+      </if>
+      <if test="dateCostTime != null" >
+        date_cost_time = #{dateCostTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strProvince != null" >
+        str_province = #{strProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="strCardNumber != null" >
+        str_card_number = #{strCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dateBuyCard != null" >
+        date_buy_card = #{dateBuyCard,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateEffectiveDate != null" >
+        date_effective_date = #{dateEffectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strBuyPattern != null" >
+        str_buy_pattern = #{strBuyPattern,jdbcType=VARCHAR},
+      </if>
+      <if test="dateEndDate != null" >
+        date_end_date = #{dateEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strSys != null" >
+        str_sys = #{strSys,jdbcType=VARCHAR},
+      </if>
+      <if test="strPhoneBrand != null" >
+        str_phone_brand = #{strPhoneBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="strColor != null" >
+        str_color = #{strColor,jdbcType=CHAR},
+      </if>
+      <if test="strPhoneModel != null" >
+        str_phone_model = #{strPhoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="strCity != null" >
+        str_city = #{strCity,jdbcType=VARCHAR},
+      </if>
+      <if test="intInternal != null" >
+        int_internal = #{intInternal,jdbcType=INTEGER},
+      </if>
+      <if test="strStore != null" >
+        str_store = #{strStore,jdbcType=VARCHAR},
+      </if>
+      <if test="strImeiNum != null" >
+        str_imei_num = #{strImeiNum,jdbcType=VARCHAR},
+      </if>
+      <if test="strSalesman != null" >
+        str_salesman = #{strSalesman,jdbcType=VARCHAR},
+      </if>
+      <if test="intLoanAmount != null" >
+        int_loan_amount = #{intLoanAmount,jdbcType=INTEGER},
+      </if>
+      <if test="intBatchNum != null" >
+        int_batch_num = #{intBatchNum,jdbcType=INTEGER},
+      </if>
+      <if test="intStatus != null" >
+        int_status = #{intStatus,jdbcType=INTEGER},
+      </if>
+      <if test="strCardType != null" >
+        str_card_type = #{strCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelProductId != null" >
+        channel_product_id = #{channelProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="policySubmissionDate != null" >
+        policy_submission_date = #{policySubmissionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        delFlag = #{delflag,jdbcType=CHAR},
+      </if>
+      <if test="invite != null" >
+        invite = #{invite,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteflag != null" >
+        inviteflag = #{inviteflag,jdbcType=CHAR},
+      </if>
+      <if test="fromtype != null" >
+        fromType = #{fromtype,jdbcType=CHAR},
+      </if>
+      <if test="bhstauts != null" >
+        bhStauts = #{bhstauts,jdbcType=INTEGER},
+      </if>
+      <if test="callguke != null" >
+        callGuKe = #{callguke,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="externalIdentifier != null" >
+        external_identifier = #{externalIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="bhFlag != null" >
+        bh_flag = #{bhFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="insurancePeriods != null" >
+        insurance_periods = #{insurancePeriods,jdbcType=VARCHAR},
+      </if>
+      <if test="surplusCoverage != null" >
+        surplus_coverage = #{surplusCoverage,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.policy.entity.HtPolicyInfo" >
+    update ht_policy_info
+    set unique_mark = #{uniqueMark,jdbcType=VARCHAR},
+      str_name = #{strName,jdbcType=VARCHAR},
+      str_contact_num = #{strContactNum,jdbcType=CHAR},
+      str_type = #{strType,jdbcType=VARCHAR},
+      str_weChat = #{strWechat,jdbcType=VARCHAR},
+      str_card_id = #{strCardId,jdbcType=VARCHAR},
+      date_birthday = #{dateBirthday,jdbcType=TIMESTAMP},
+      str_sex = #{strSex,jdbcType=VARCHAR},
+      str_filiale = #{strFiliale,jdbcType=VARCHAR},
+      str_channel_name = #{strChannelName,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      channel_product_name = #{channelProductName,jdbcType=VARCHAR},
+      int_product_price = #{intProductPrice,jdbcType=INTEGER},
+      coverage = #{coverage,jdbcType=DECIMAL},
+      int_sell_price = #{intSellPrice,jdbcType=INTEGER},
+      date_cost_time = #{dateCostTime,jdbcType=TIMESTAMP},
+      str_province = #{strProvince,jdbcType=VARCHAR},
+      str_card_number = #{strCardNumber,jdbcType=VARCHAR},
+      date_buy_card = #{dateBuyCard,jdbcType=TIMESTAMP},
+      date_effective_date = #{dateEffectiveDate,jdbcType=TIMESTAMP},
+      str_buy_pattern = #{strBuyPattern,jdbcType=VARCHAR},
+      date_end_date = #{dateEndDate,jdbcType=TIMESTAMP},
+      str_sys = #{strSys,jdbcType=VARCHAR},
+      str_phone_brand = #{strPhoneBrand,jdbcType=VARCHAR},
+      str_color = #{strColor,jdbcType=CHAR},
+      str_phone_model = #{strPhoneModel,jdbcType=VARCHAR},
+      str_city = #{strCity,jdbcType=VARCHAR},
+      int_internal = #{intInternal,jdbcType=INTEGER},
+      str_store = #{strStore,jdbcType=VARCHAR},
+      str_imei_num = #{strImeiNum,jdbcType=VARCHAR},
+      str_salesman = #{strSalesman,jdbcType=VARCHAR},
+      int_loan_amount = #{intLoanAmount,jdbcType=INTEGER},
+      int_batch_num = #{intBatchNum,jdbcType=INTEGER},
+      int_status = #{intStatus,jdbcType=INTEGER},
+      str_card_type = #{strCardType,jdbcType=VARCHAR},
+      channel_product_id = #{channelProductId,jdbcType=VARCHAR},
+      policy_submission_date = #{policySubmissionDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      delFlag = #{delflag,jdbcType=CHAR},
+      invite = #{invite,jdbcType=VARCHAR},
+      inviteflag = #{inviteflag,jdbcType=CHAR},
+      fromType = #{fromtype,jdbcType=CHAR},
+      bhStauts = #{bhstauts,jdbcType=INTEGER},
+      callGuKe = #{callguke,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      external_identifier = #{externalIdentifier,jdbcType=VARCHAR},
+      bh_flag = #{bhFlag,jdbcType=VARCHAR},
+      insurance_periods = #{insurancePeriods,jdbcType=VARCHAR},
+      surplus_coverage = #{surplusCoverage,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace= "com.dxt.ht.svc.user.dao.HtUserInfoDao" >
+    <resultMap id ="UserInfoMap" type="com.dxt.ht.svc.user.entity.HtUserInfo">
+        <result column="id" property="id"/>
+        <result column="open_id" property="openId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="create_date" property="createDate"/>
+        <result column="del_flag" property="delFlag"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+      id,open_id,user_name,user_phone,update_date,create_date,del_flag
+    </sql>
+
+    <sql id = "allColumnCond">
+        <if test = "openId != null and openId != ''">
+            AND open_id=#{openId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <insert id="saveUser"  parameterType="com.dxt.ht.svc.user.entity.HtUserInfo">
+        insert into ht_user_info values (#{id},#{openId},#{userName},#{userPhone},NOW(),NOW(),'0')
+    </insert>
+
+    <select id="getUserInfo" resultMap="UserInfoMap">
+        select * from ht_user_info where id = #{userId} and del_flag = '0'
+    </select>
+
+    <select id="select" resultMap="UserInfoMap" parameterType="hashmap" >
+        select
+        <include refid="Base_Column_List" />
+        from ht_user_info
+        where 1=1
+        <include refid="allColumnCond"/>
+    </select>
+    <select id="selectById" resultMap="UserInfoMap">
+        select
+        <include refid="Base_Column_List" />
+        from ht_user_info
+        where open_id = #{id}
+    </select>
+
+</mapper>

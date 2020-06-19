@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.apply.dao.HtUserApplyInfoDao" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.apply.entity.HtUserApplyInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="policy_id" property="policyId" jdbcType="VARCHAR" />
+    <result column="form_id" property="formId" jdbcType="VARCHAR" />
+    <result column="facility_brand_id" property="facilityBrandId" jdbcType="VARCHAR" />
+    <result column="facility_model_id" property="facilityModelId" jdbcType="VARCHAR" />
+    <result column="facility_color" property="facilityColor" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="malfunction_date" property="malfunctionDate" jdbcType="DATE" />
+    <result column="malfunction_id" property="malfunctionId" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="card_name" property="cardName" jdbcType="VARCHAR" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="card_start_date" property="cardStartDate" jdbcType="VARCHAR" />
+    <result column="card_end_date" property="cardEndDate" jdbcType="VARCHAR" />
+    <result column="bad_side_wimg" property="badSideWimg" jdbcType="VARCHAR" />
+    <result column="bad_side_oimg" property="badSideOimg" jdbcType="VARCHAR" />
+    <result column="bad_reverse_img" property="badReverseImg" jdbcType="VARCHAR" />
+    <result column="bad_front_img" property="badFrontImg" jdbcType="VARCHAR" />
+    <result column="card_reverse_img" property="cardReverseImg" jdbcType="VARCHAR" />
+    <result column="card_front_img" property="cardFrontImg" jdbcType="VARCHAR" />
+    <result column="card_hand_img" property="cardHandImg" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="insurance_facility_name" property="insuranceFacilityName" jdbcType="VARCHAR" />
+    <result column="is_main" property="isMain" jdbcType="CHAR" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="disqualification" property="disqualification" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dxt.ht.svc.apply.entity.HtUserApplyInfo" extends="BaseResultMap" >
+    <result column="voucher_img" property="voucherImg" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, policy_id, form_id, facility_brand_id, facility_model_id, facility_color, area_id,
+    malfunction_date, malfunction_id, user_phone, card_name, card_id, card_start_date,
+    card_end_date, bad_side_wimg, bad_side_oimg, bad_reverse_img, bad_front_img, card_reverse_img,
+    card_front_img, card_hand_img, is_main,product_name,insurance_facility_name,user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    voucher_img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ht_user_apply_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_user_apply_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dxt.ht.svc.apply.entity.HtUserApplyInfo" >
+    insert into ht_user_apply_info (id, policy_id, form_id,
+      facility_brand_id, facility_model_id, facility_color,
+      area_id, malfunction_date, malfunction_id,
+      user_phone, card_name, card_id,
+      card_start_date, card_end_date, bad_side_wimg,
+      bad_side_oimg, bad_reverse_img, bad_front_img,
+      card_reverse_img, card_front_img, card_hand_img,
+      is_main, voucher_img)
+    values (#{id,jdbcType=VARCHAR}, #{policyId,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR},
+      #{facilityBrandId,jdbcType=VARCHAR}, #{facilityModelId,jdbcType=VARCHAR}, #{facilityColor,jdbcType=VARCHAR},
+      #{areaId,jdbcType=VARCHAR}, #{malfunctionDate,jdbcType=DATE}, #{malfunctionId,jdbcType=VARCHAR},
+      #{userPhone,jdbcType=VARCHAR}, #{cardName,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR},
+      #{cardStartDate,jdbcType=DATE}, #{cardEndDate,jdbcType=DATE}, #{badSideWimg,jdbcType=VARCHAR},
+      #{badSideOimg,jdbcType=VARCHAR}, #{badReverseImg,jdbcType=VARCHAR}, #{badFrontImg,jdbcType=VARCHAR},
+      #{cardReverseImg,jdbcType=VARCHAR}, #{cardFrontImg,jdbcType=VARCHAR}, #{cardHandImg,jdbcType=VARCHAR},
+      #{isMain,jdbcType=CHAR}, #{voucherImg,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dxt.ht.svc.apply.entity.HtUserApplyInfo" >
+    insert into ht_user_apply_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="policyId != null" >
+        policy_id,
+      </if>
+      <if test="formId != null" >
+        form_id,
+      </if>
+      <if test="facilityBrandId != null" >
+        facility_brand_id,
+      </if>
+      <if test="facilityModelId != null" >
+        facility_model_id,
+      </if>
+      <if test="facilityColor != null" >
+        facility_color,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="malfunctionDate != null" >
+        malfunction_date,
+      </if>
+      <if test="malfunctionId != null" >
+        malfunction_id,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="cardName != null" >
+        card_name,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="cardStartDate != null" >
+        card_start_date,
+      </if>
+      <if test="cardEndDate != null" >
+        card_end_date,
+      </if>
+      <if test="badSideWimg != null" >
+        bad_side_wimg,
+      </if>
+      <if test="badSideOimg != null" >
+        bad_side_oimg,
+      </if>
+      <if test="badReverseImg != null" >
+        bad_reverse_img,
+      </if>
+      <if test="badFrontImg != null" >
+        bad_front_img,
+      </if>
+      <if test="cardReverseImg != null" >
+        card_reverse_img,
+      </if>
+      <if test="cardFrontImg != null" >
+        card_front_img,
+      </if>
+      <if test="cardHandImg != null" >
+        card_hand_img,
+      </if>
+      <if test="isMain != null" >
+        is_main,
+      </if>
+      <if test="voucherImg != null" >
+        voucher_img,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="insuranceFacilityName != null and insuranceFacilityName != ''" >
+        insurance_facility_name,
+      </if>
+      <if test="userId != null and userId != ''" >
+        user_id,
+      </if>
+      update_date,
+      create_date,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="policyId != null" >
+        #{policyId,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityBrandId != null" >
+        #{facilityBrandId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityModelId != null" >
+        #{facilityModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityColor != null" >
+        #{facilityColor,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="malfunctionDate != null" >
+        #{malfunctionDate,jdbcType=DATE},
+      </if>
+      <if test="malfunctionId != null" >
+        #{malfunctionId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cardName != null" >
+        #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardStartDate != null" >
+        #{cardStartDate,jdbcType=DATE},
+      </if>
+      <if test="cardEndDate != null" >
+        #{cardEndDate,jdbcType=DATE},
+      </if>
+      <if test="badSideWimg != null" >
+        #{badSideWimg,jdbcType=VARCHAR},
+      </if>
+      <if test="badSideOimg != null" >
+        #{badSideOimg,jdbcType=VARCHAR},
+      </if>
+      <if test="badReverseImg != null" >
+        #{badReverseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="badFrontImg != null" >
+        #{badFrontImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardReverseImg != null" >
+        #{cardReverseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardFrontImg != null" >
+        #{cardFrontImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardHandImg != null" >
+        #{cardHandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null" >
+        #{isMain,jdbcType=CHAR},
+      </if>
+      <if test="voucherImg != null" >
+        #{voucherImg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceFacilityName != null and insuranceFacilityName != ''" >
+        #{insuranceFacilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null and userId != ''" >
+        #{userId},
+      </if>
+      NOW(),
+      NOW(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.apply.entity.HtUserApplyInfo" >
+    update ht_user_apply_info
+    <set >
+      <if test="policyId != null" >
+        policy_id = #{policyId,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null" >
+        form_id = #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityBrandId != null" >
+        facility_brand_id = #{facilityBrandId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityModelId != null" >
+        facility_model_id = #{facilityModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityColor != null" >
+        facility_color = #{facilityColor,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null and areaId != ''" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="malfunctionDate != null" >
+        malfunction_date = #{malfunctionDate,jdbcType=DATE},
+      </if>
+      <if test="malfunctionId != null" >
+        malfunction_id = #{malfunctionId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cardName != null" >
+        card_name = #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardStartDate != null" >
+        card_start_date = #{cardStartDate,jdbcType=DATE},
+      </if>
+      <if test="cardEndDate != null" >
+        card_end_date = #{cardEndDate,jdbcType=DATE},
+      </if>
+      <if test="badSideWimg != null" >
+        bad_side_wimg = #{badSideWimg,jdbcType=VARCHAR},
+      </if>
+      <if test="badSideOimg != null" >
+        bad_side_oimg = #{badSideOimg,jdbcType=VARCHAR},
+      </if>
+      <if test="badReverseImg != null" >
+        bad_reverse_img = #{badReverseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="badFrontImg != null" >
+        bad_front_img = #{badFrontImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardReverseImg != null" >
+        card_reverse_img = #{cardReverseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardFrontImg != null" >
+        card_front_img = #{cardFrontImg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardHandImg != null" >
+        card_hand_img = #{cardHandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null" >
+        is_main = #{isMain,jdbcType=CHAR},
+      </if>
+      <if test="voucherImg != null" >
+        voucher_img = #{voucherImg,jdbcType=LONGVARCHAR},
+      </if>
+      update_date = NOW(),
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dxt.ht.svc.apply.entity.HtUserApplyInfo" >
+    update ht_user_apply_info
+    set policy_id = #{policyId,jdbcType=VARCHAR},
+      form_id = #{formId,jdbcType=VARCHAR},
+      facility_brand_id = #{facilityBrandId,jdbcType=VARCHAR},
+      facility_model_id = #{facilityModelId,jdbcType=VARCHAR},
+      facility_color = #{facilityColor,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      malfunction_date = #{malfunctionDate,jdbcType=DATE},
+      malfunction_id = #{malfunctionId,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      card_name = #{cardName,jdbcType=VARCHAR},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      card_start_date = #{cardStartDate,jdbcType=DATE},
+      card_end_date = #{cardEndDate,jdbcType=DATE},
+      bad_side_wimg = #{badSideWimg,jdbcType=VARCHAR},
+      bad_side_oimg = #{badSideOimg,jdbcType=VARCHAR},
+      bad_reverse_img = #{badReverseImg,jdbcType=VARCHAR},
+      bad_front_img = #{badFrontImg,jdbcType=VARCHAR},
+      card_reverse_img = #{cardReverseImg,jdbcType=VARCHAR},
+      card_front_img = #{cardFrontImg,jdbcType=VARCHAR},
+      card_hand_img = #{cardHandImg,jdbcType=VARCHAR},
+      is_main = #{isMain,jdbcType=CHAR},
+      voucher_img = #{voucherImg,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.apply.entity.HtUserApplyInfo" >
+    update ht_user_apply_info
+    set policy_id = #{policyId,jdbcType=VARCHAR},
+      form_id = #{formId,jdbcType=VARCHAR},
+      facility_brand_id = #{facilityBrandId,jdbcType=VARCHAR},
+      facility_model_id = #{facilityModelId,jdbcType=VARCHAR},
+      facility_color = #{facilityColor,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      malfunction_date = #{malfunctionDate,jdbcType=DATE},
+      malfunction_id = #{malfunctionId,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      card_name = #{cardName,jdbcType=VARCHAR},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      card_start_date = #{cardStartDate,jdbcType=DATE},
+      card_end_date = #{cardEndDate,jdbcType=DATE},
+      bad_side_wimg = #{badSideWimg,jdbcType=VARCHAR},
+      bad_side_oimg = #{badSideOimg,jdbcType=VARCHAR},
+      bad_reverse_img = #{badReverseImg,jdbcType=VARCHAR},
+      bad_front_img = #{badFrontImg,jdbcType=VARCHAR},
+      card_reverse_img = #{cardReverseImg,jdbcType=VARCHAR},
+      card_front_img = #{cardFrontImg,jdbcType=VARCHAR},
+      card_hand_img = #{cardHandImg,jdbcType=VARCHAR},
+      is_main = #{isMain,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectInfoByFormId" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />,
+    (SELECT c.disqualification_disqualification FROM ht_claim_settlement_form c WHERE c.form_id =#{formId}) AS 'disqualification'
+    from ht_user_apply_info where form_id = #{formId}
+  </select>
+
+  <select id="getApplyStatus" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ht_user_apply_info WHERE policy_id =  #{policyId}  ORDER BY create_date DESC  LIMIT 1
+  </select>
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dxt.ht.svc.daddress.dao.HtMainPointMapper">
+  <resultMap id="HtMaintenancePointMap" type="com.dxt.ht.svc.daddress.entity.HtMainPoint">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="form_type" jdbcType="VARCHAR" property="formType" />
+    <result column="maintenance_point_name" jdbcType="VARCHAR" property="maintenancePointName" />
+    <result column="contact_one" jdbcType="VARCHAR" property="contactOne" />
+    <result column="contact_number_one" jdbcType="VARCHAR" property="contactNumberOne" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="contract_life_start" jdbcType="TIMESTAMP" property="contractLifeStart" />
+    <result column="contract_life_end" jdbcType="TIMESTAMP" property="contractLifeEnd" />
+    <result column="door_picture" jdbcType="VARCHAR" property="doorPicture" />
+    <result column="whether_order" jdbcType="CHAR" property="whetherOrder" />
+    <result column="organization_id" jdbcType="VARCHAR" property="organizationId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="longitude_latitude" jdbcType="LONGVARCHAR" property="longitudeLatitude" />
+    <result column="coverage_province" jdbcType="LONGVARCHAR" property="coverageProvince" />
+    <result column="coverage_city" jdbcType="LONGVARCHAR" property="coverageCity" />
+  </resultMap>
+
+  <resultMap id="HtFormInfoMap" type="com.dxt.ht.svc.form.entity.HtFormInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="policy_id" jdbcType="VARCHAR" property="policyId" />
+    <result column="manage_status" jdbcType="VARCHAR" property="manageStatus" />
+    <result column="form_status" jdbcType="VARCHAR" property="formStatus" />
+    <result column="form_type" jdbcType="VARCHAR" property="formType" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="is_automatic" jdbcType="CHAR" property="isAutomatic" />
+    <result column="office_id" jdbcType="VARCHAR" property="officeId" />
+    <result column="is_run" jdbcType="CHAR" property="isRun" />
+  </resultMap>
+  <sql id="Ht_Form_Info">
+    id, policy_id, manage_status, form_status, form_type, status, create_by, create_date,
+    update_by, update_date, remarks, is_automatic, office_id, is_run
+  </sql>
+  <sql id="Ht_Maintenance_Point">
+    hmp.id, hmp.maintenance_point_name, hmp.contact_one, hmp.contact_number_one, hmp.contact_two, hmp.contact_number_two,
+    hmp.address
+  </sql>
+
+  <select id="findPostAddress"  resultMap="HtMaintenancePointMap">
+     SELECT
+    hmp.id,h.form_type as form_type,hmp.maintenance_point_name, hmp.contact_one, hmp.contact_number_one,hmp.address,
+    province.area_name as province,
+    city.area_name as city,area.area_name as area
+    FROM ht_maintenance_point hmp INNER JOIN ht_form_info h ON  h.office_id=hmp.organization_id
+    inner join js_sys_area province on hmp.province = province.area_code
+    inner join js_sys_area city on hmp.city = city.area_code
+    inner join js_sys_area area on hmp.area = area.area_code
+    WHERE h.id=#{id}
+  </select>
+  <select id="findType"  resultMap="HtMaintenancePointMap">
+    SELECT
+    h.form_type
+    FROM  ht_form_info h
+    WHERE h.id=#{id} and (h.form_type='1' or h.form_type ='2')
+  </select>
+  <select id="findChangdeAddress"  resultMap="HtMaintenancePointMap">
+   SELECT
+    h.id
+    FROM ht_form_info h
+    WHERE h.id=#{id}
+  </select>
+</mapper>

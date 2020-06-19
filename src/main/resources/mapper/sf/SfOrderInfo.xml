@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dxt.ht.svc.sf.dao.SfOrderDao">
+    <resultMap id="BaseResultMap" type="com.dxt.ht.svc.sf.entity.SfOrderInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="sf_order_id" jdbcType="VARCHAR" property="sfOrderId"/>
+        <result column="mail_no" jdbcType="VARCHAR" property="mailNo"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="j_contact" jdbcType="VARCHAR" property="jContact"/>
+        <result column="j_mobile" jdbcType="VARCHAR" property="jMobile"/>
+        <result column="j_province" jdbcType="VARCHAR" property="jProvince"/>
+        <result column="j_city" jdbcType="VARCHAR" property="jCity"/>
+        <result column="j_area" jdbcType="VARCHAR" property="jArea"/>
+        <result column="d_contact" jdbcType="VARCHAR" property="dContact"/>
+        <result column="d_tel" jdbcType="VARCHAR" property="dTel"/>
+        <result column="d_province" jdbcType="VARCHAR" property="dProvince"/>
+        <result column="d_city" jdbcType="VARCHAR" property="dCity"/>
+        <result column="d_area" jdbcType="VARCHAR" property="dArea"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="del_flag" jdbcType="CHAR" property="delFlag"/>
+        <result column="j_address" jdbcType="LONGVARCHAR" property="jAddress"/>
+        <result column="d_company" jdbcType="LONGVARCHAR" property="dCompany"/>
+        <result column="d_address" jdbcType="LONGVARCHAR" property="dAddress"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id,order_id,sf_order_id,mail_no,status,j_contact, j_mobile, j_province, j_city, j_area, j_address, d_contact, d_tel, d_province, d_city, d_area, d_address
+  </sql>
+    <select id="findSf" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sf_order_info
+        where order_id = #{orderId} and del_flag="0"
+    </select>
+
+    <update id="saveSfOrder" parameterType="com.dxt.ht.svc.sf.entity.SfOrderInfo">
+    update  sf_order_info set order_id=#{orderId},mail_no=#{mailNo},sf_order_id=#{sfOrderId},j_contact=#{jContact}, j_mobile=#{jMobile}, j_province=#{jProvince}, j_city=#{jCity},
+    j_area=#{jArea}, d_contact=#{dContact}, d_tel=#{dTel}, create_date= NOW(), del_flag="0",
+    j_address=#{jAddress}, d_company= #{dCompany}, d_province=#{dProvince}, d_city=#{dCity},
+    d_area=#{dArea},d_address=#{dAddress},status='0',create_by = #{createBy,jdbcType=VARCHAR},
+    create_by = #{createBy,jdbcType=VARCHAR}, update_date = #{updateDate,jdbcType=TIMESTAMP},
+     update_by = #{updateBy,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=VARCHAR} AND order_id = #{orderId}
+</update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dxt.ht.svc.sf.entity.SfOrderInfo" >
+        update sf_order_info
+        <set >
+            <if test="sfOrderId != null" >
+                sf_order_id = #{sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="mailNo != null" >
+                mail_no = #{mailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="jContact != null" >
+                j_contact = #{jContact,jdbcType=VARCHAR},
+            </if>
+            <if test="jMobile != null" >
+                j_mobile = #{jMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="jProvince != null" >
+                j_province = #{jProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="jCity != null" >
+                j_city = #{jCity,jdbcType=VARCHAR},
+            </if>
+            <if test="jArea != null" >
+                j_area = #{jArea,jdbcType=VARCHAR},
+            </if>
+            <if test="dContact != null" >
+                d_contact = #{dContact,jdbcType=VARCHAR},
+            </if>
+            <if test="dTel != null" >
+                d_tel = #{dTel,jdbcType=VARCHAR},
+            </if>
+            <if test="dProvince != null" >
+                d_province = #{dProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="dCity != null" >
+                d_city = #{dCity,jdbcType=VARCHAR},
+            </if>
+            <if test="dArea != null" >
+                d_area = #{dArea,jdbcType=VARCHAR},
+            </if>
+            <if test="jAddress != null" >
+                j_address = #{jAddress,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="dCompany != null" >
+                d_company = #{dCompany,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="dAddress != null" >
+                d_address = #{dAddress,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR} AND order_id = #{orderId}
+    </update>
+    <select id="findAddress" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sf_order_info
+        WHERE sf_order_info.mail_no=#{mailNo}
+    </select>
+    <select id="logisticsInformation" parameterType="com.dxt.ht.svc.sf.entity.SfOrderInfo" resultMap="BaseResultMap">
+        SELECT s.sf_order_id,s.mail_no
+        From sf_order_info s
+        WHERE s.order_id=#{orderId}
+        order by create_date desc
+        limit 1
+  </select>
+<!--
+    <select id="getMail" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT mail_no
+        From sf_order_info
+        WHERE order_id=#{orderId}
+        order by create_date desc
+        limit 1
+  </select>
+-->
+
+
+
+</mapper>

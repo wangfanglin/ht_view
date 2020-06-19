@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.form.dao.HtDeductibleInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.form.entity.HtDeductibleInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="form_id" property="formId" jdbcType="VARCHAR" />
+    <result column="bd_id" property="bdId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="deductibles_limit" property="deductiblesLimit" jdbcType="DECIMAL" />
+    <result column="maintain_typr" property="maintainTypr" jdbcType="CHAR" />
+    <result column="offer_date" property="offerDate" jdbcType="TIMESTAMP" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <result column="pay_status" property="payStatus" jdbcType="CHAR" />
+    <result column="affirm_status" property="affirmStatus" jdbcType="CHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="wx_nick" property="wxNick" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="CHAR" />
+    <result column="form_type" property="formType" jdbcType="CHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, form_id, bd_id, user_name, phone, product_name, product_id, deductibles_limit, 
+    maintain_typr, offer_date, pay_date, pay_status, affirm_status, open_id, wx_nick, 
+    create_date, create_by, update_date, update_by, remark, pay_type, form_type
+  </sql>
+
+    <sql id = "allColumnCond">
+        <if test = "formId != null and formId != ''">
+            AND form_id=#{formId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_deductible_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ht_deductible_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="hashmap" >
+        select
+        <include refid="Base_Column_List" />
+        from ht_deductible_info
+        where 1=1
+        <include refid="allColumnCond"/>
+    </select>
+  <update id="updateByPrimaryKey" parameterType="com.dxt.ht.svc.form.entity.HtDeductibleInfo" >
+    update ht_deductible_info
+    <set >
+      <if test="formId != null" >
+        form_id = #{formId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdId != null" >
+        bd_id = #{bdId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="deductiblesLimit != null" >
+        deductibles_limit = #{deductiblesLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="maintainTypr != null" >
+        maintain_typr = #{maintainTypr,jdbcType=CHAR},
+      </if>
+      <if test="offerDate != null" >
+        offer_date = #{offerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDate != null" >
+        pay_date = #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payStatus != null" >
+        pay_status = #{payStatus,jdbcType=CHAR},
+      </if>
+      <if test="affirmStatus != null" >
+        affirm_status = #{affirmStatus,jdbcType=CHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNick != null" >
+        wx_nick = #{wxNick,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=CHAR},
+      </if>
+      <if test="formType != null" >
+        form_type = #{formType,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateStatus">
+    update ht_deductible_info set pay_status = #{status},pay_date=NOW() where id = #{outId}
+  </update>
+  <select id="selectPayStatus" resultType="java.lang.String">
+    SELECT pay_status FROM ht_deductible_info WHERE form_id = #{fromId} ORDER BY update_date ;
+  </select>
+    <select id="selectByFormIds" parameterType="java.util.List" resultType="com.dxt.ht.svc.form.entity.HtDeductibleInfo" >
+        SELECT
+        id as "id", form_id as "formId", bd_id as "bdId", user_name as "userName", phone as "phone", product_name as "productName", product_id as "productId", deductibles_limit as "deductiblesLimit",
+        maintain_typr as "maintainTypr", offer_date as "offerDate", pay_date as "payDate", pay_status as "payStatus", affirm_status as "affirmStatus", open_id as "openId", wx_nick as "wxNick",
+        create_date as "createDate", create_by as "createBy", update_date as "updateDate", update_by as "updateBy", remark as "remark", pay_type as "payType", form_type as "formType"
+        FROM ht_deductible_info
+        WHERE form_id IN
+        <foreach collection="list" index="index" item="formId" open="(" separator="," close=")">
+            #{formId}
+        </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dxt.ht.svc.product.dao.HtGroupProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.dxt.ht.svc.product.entity.HtGroupProductInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="combination_type" property="combinationType" jdbcType="VARCHAR" />
+    <result column="is_single_validity" property="isSingleValidity" jdbcType="CHAR" />
+    <result column="is_start" property="isStart" jdbcType="CHAR" />
+    <result column="termination_rules" property="terminationRules" jdbcType="CHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="is_accordance" property="isAccordance" jdbcType="CHAR" />
+    <result column="max_price" property="maxPrice" jdbcType="DECIMAL" />
+    <result column="min_price" property="minPrice" jdbcType="DECIMAL" />
+    <result column="coverage" property="coverage" jdbcType="DECIMAL" />
+    <result column="price_flag" property="priceFlag" jdbcType="CHAR" />
+    <result column="termination_rules_item" property="terminationRulesItem" jdbcType="VARCHAR" />
+    <result column="termination_rules_sketch" property="terminationRulesSketch" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_name, combination_type, is_single_validity, is_start, termination_rules, 
+    create_date, create_by, update_date, update_by, remark, status, is_accordance, max_price, 
+    min_price, coverage, price_flag, termination_rules_item,termination_rules_sketch
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ht_group_product_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

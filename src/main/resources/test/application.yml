@@ -1,0 +1,45 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /ht-svc
+  tomcat:
+    uri-encoding: UTF-8
+
+
+spring:
+  #服务名称
+  application:
+    name: ht-svc
+
+  #======================================#
+  #========== Database settings ==========#
+  #======================================#
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-2ze9e2mke0qxtwz26mo.mysql.rds.aliyuncs.com:3306/test_ht?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: test_ht
+    password: R1heW2OzxgZcfUZM
+
+mybatis:
+  #typeAliasesPackage: com.example.mybaitsxml.dao.entity
+  mapperLocations: classpath:mapper/*/*.xml
+  type-aliases-package: com.dxt.ht.svc.*.entity
+
+wechat:
+  appId: wx1616c8392f192452
+  appSecret: 42342cfd42fbfe7d59d7a3eb812ed641
+  mchId: 1246530201
+  payKey: hedexintongshanghuzhifupingtai18
+# 打印sql
+logging:
+  level:
+    com.dxt.ht.svc : debug
+
+# 七牛云
+qiNiuYun:
+  accessKey: C4HIK20bxi2SKawJfcBgaNSghdWPpBYAClrPLWt7
+  secretKey: FFnFBciC-sytnfbvCK0-xX4AWsgqK3uWfFvWck7C
+  bucketName: ht2imagespace
+
+
+
